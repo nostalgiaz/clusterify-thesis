@@ -1,0 +1,47 @@
+\documentclass[a4paper,11pt]{report}
+
+\usepackage{graphicx}
+\usepackage{cmap}
+\usepackage{cite}
+\usepackage{amsmath}
+\usepackage[T1]{fontenc}
+\usepackage{tipa}
+\usepackage[utf8]{inputenc}
+\usepackage{url}
+\usepackage{listings}
+\usepackage{epigraph}
+\usepackage[english]{babel}
+
+\setlength\epigraphwidth{11cm}
+\setlength\epigraphrule{0pt}
+
+\newcommand\chap[1]{%
+  \chapter*{#1}%
+  \addcontentsline{toc}{chapter}{\protect\numberline{}#1}}
+  
+\addto\captionsenglish{
+  \renewcommand{\contentsname}%
+    {Contenuti}%
+}  
+  
+\title{Clusterify: clustering non supervisionato di tweets}
+\author{Mattia Larentis}
+
+\begin{document}
+  \input{copertina}
+  \input{dedica}
+  \tableofcontents
+  \input{prefazione}  
+  \input{clustering}
+  \input{twitter}
+  \input{datatxt}
+  \input{clusterify}
+  \input{conclusione}
+  \input{ringraziamenti}
+  
+%  \bibliographystyle{plain}
+%  \bibliography{bibliography}
+  
+%  \input{appendices}
+
+\end{document}
