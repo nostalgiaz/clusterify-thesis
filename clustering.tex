@@ -1,10 +1,16 @@
-\chapter{Clustering}
+\chapter{Clusters e clustering}
 
 Il \emph{clustering} è una tecnica di raggruppamento di oggetti in insiemi, secondo determinate regole, con l'intento che gli appartenenti allo stesso \emph{cluster} siano più simili di quelli contentuti negli altri gruppi.
 
-Queste regole tendono a minimizzare la \emph{distanza} interna a ciascun gruppo ed a massimizzare quella tra i gruppi stessi: questa distanza viene quantificata per mezzo di misure di similarità [Qui ricordati la differenza tra una distanza e una dissimilarita`].
+Queste regole tendono a minimizzare la \emph{distanza} interna a ciascun gruppo ed a massimizzare quella tra i gruppi stessi: questa distanza viene quantificata per mezzo di misure di similarità.
 
-\section{Clusters e clustering}
+La distanza è una qualsiasi funzione $d:X \times X \to \mathbb{R}$ che soddisfa:
+\begin{align*}
+	d(x,y) &\geq 0 \\
+	d(x,y) &= 0 \iff x=y \\
+	d(x,y) &= d(y,x) \\
+	d(x,y) &\leq d(x,z) + d(z,y)
+\end{align*}
 
 Non esiste un solo algoritmo per raggruppare in modo corretto, bensì un solo compito da portare a termine. Questo obiettivo può essere raggiunto in più modi, basandosi su qualsivoglia tipo di nozione col solo fine di raggruppare in modo efficiente e sensato gli oggetti dati. 
 
@@ -19,7 +25,7 @@ I modelli di clustering tipici sono:
 	\item Clustering density-based 
 \end{itemize}
 
-\subsection{Clustering partizionale}
+\section{Clustering partizionale}
 	% http://en.wikipedia.org/wiki/Cluster_analysis#Centroid-based_clustering
 	
 	Gli algoritmi di clustering di questa famiglia creano una partizione delle osservazioni minimizzando la seguente funzione di costo:
@@ -30,7 +36,7 @@ I modelli di clustering tipici sono:
 
 	Questa tipologia di algoritmi solitamente richiede all'utente di specificare $k$, il numero di cluster distinti che si vogliono raggiundere a processo terminato, e mira ad identificare i gruppi naturali presenti nel dataset, generando una partizione composta da cluster disgiunti la cui unione ritorna il dataset originale.
 	
-	\subsubsection{Algoritmi conosciuti}
+	\subsection{Algoritmi conosciuti}
 		Gli algoritmi più famosi appartenenti questa categoria sono: 
 		\begin{itemize}
 		  	\item k-means
@@ -38,7 +44,7 @@ I modelli di clustering tipici sono:
 		  	\item CLARANS
 		\end{itemize}
 
-\subsection{Clustering gerarchico}
+\section{Clustering gerarchico}
     % http://en.wikipedia.org/wiki/Cluster_analysis#Connectivity_based_clustering_.28hierarchical_clustering.29
 
 	Gli algoritmi di clustering gerarchico, invece, creano una rappresentazione gerarchia ad albero dei cluster.
@@ -48,24 +54,25 @@ I modelli di clustering tipici sono:
 		\item Divisivo
 	\end{itemize}
 	
-	\subsubsection{Metodo agglomerativo}
+	\subsection{Metodo agglomerativo}
 		Il metodo agglomerativo segue un approccio \emph{bottom up} al problema dove, inzialmente, si ha un cluster per ogni oggetto e, successivamente, si procede all'unione di questi cluster, basando la selezione dei cluster da unire ad una \emph{funzione di similarità}.
 
-	\subsubsection{Metodo divisivo}
+	\subsection{Metodo divisivo}
 		Il metodo divisivo, invece, segue un approccio \emph{top down} al problema dove, inizialemtente, si ha un unico cluster contente tutti gli oggetti e, via via, viene suddiviso in più sotto-cluster, basando la selezione del cluster da dividere ad una \emph{funzione di similarità}. Solitamente si impone un numero minimo di elementi che ogni cluster deve contenere alla fine del processo. 
 
-	\subsubsection{Dissimilarità tra cluster}
+	\subsection{Dissimilarità tra cluster}
 		Nella maggior parte dei metodi di clustering gerarchico si fa uso di metriche specifiche che quantificano la distanza tra coppie di elementi e di un criterio di collegamento che specifica la dissimilarità di due insiemi di elementi (cluster) come funzione della distanza a coppie tra elementi nei due insiemi.
 
-	\subsubsection{Metriche}
+	\subsection{Metriche}
 		La scelta della metrica influenza la forma dei cluster, poiché alcuni elementi possono essere più vicini utilizzando una data distanza e più lontani utilizzandone un'altra.
+
 		Le metriche comuni sono le seguenti:
 		\begin{itemize}
 		  	\item Distanza euclidea
 		  	\item Distanza di Manhattan
 		\end{itemize}
 
-	\subsubsection{Criteri di collegamento}
+	\subsection{Criteri di collegamento}
 		Il criterio di collegamento specifica la distanza tra insiemi di elementi come funzione di distanze tra gli elementi negli insiemi.
 		I criteri di collegamento comuni sono i seguenti:
 		\begin{itemize}
@@ -74,18 +81,23 @@ I modelli di clustering tipici sono:
 			\item Average linkage: calcola la distanza tra i due cluster come la media delle distanze tra i singoli elementi
 		\end{itemize}
 
-	\subsubsection{Algoritmi conosciuti}		
+	\subsection{Algoritmi conosciuti}
 		Gli algoritmi più famosi appartenenti questa categoria sono:
 		\begin{itemize}
 			\item SLINK \emph{(single-linkage)}
 		  	\item CLINK \emph{(complete-linkage)}
 		\end{itemize}
 
-\subsection{Clustering density-based}
-	Negli algoritmi di clustering density-based il raggruppamento avviene analizzando l'intorno di ogni punto dello spazio. In particolare, viene considerata la densità di punti in un intorno di raggio fissato.
+\section{Clustering density-based}
+	% http://en.wikipedia.org/wiki/Cluster_analysis#Distribution-based_clustering
+	Negli algoritmi di clustering density-based il raggruppamento avviene analizzando l'intorno di ogni punto dello spazio, connettendo regioni di punti con densità sufficientemente alta.
 	
-	\subsubsection{Algoritmi conosciuti}		
+	\subsection{Algoritmi conosciuti}		
 		Gli algoritmi più famosi appartenenti questa categoria sono:
 		\begin{itemize}
-		  	\item Bdscan
+		  	\item DBscan
 		\end{itemize}
+
+\section{Clustering distribution-based}
+	% http://en.wikipedia.org/wiki/Cluster_analysis#Density-based_clustering
+	Density-based clustering

@@ -3,3 +3,7 @@
 *.log
 *.gz
 *.toc
+.useful_links
+*.bib
+*.bbl
+*.blg

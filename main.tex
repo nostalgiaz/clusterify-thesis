@@ -3,14 +3,19 @@
 \usepackage{graphicx}
 \usepackage{cmap}
 \usepackage{cite}
-\usepackage{amsmath}
 \usepackage[T1]{fontenc}
 \usepackage{tipa}
 \usepackage[utf8]{inputenc}
 \usepackage{url}
 \usepackage{listings}
-\usepackage{epigraph}
+
 \usepackage[english]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{epigraph}
+
+\setcounter{secnumdepth}{3}
+\setcounter{tocdepth}{3}
 
 \setlength\epigraphwidth{11cm}
 \setlength\epigraphrule{0pt}
@@ -18,7 +23,7 @@
 \newcommand\chap[1]{%
   \chapter*{#1}%
   \addcontentsline{toc}{chapter}{\protect\numberline{}#1}}
-  
+
 \addto\captionsenglish{
   \renewcommand{\contentsname}%
     {Contenuti}%
@@ -38,10 +43,6 @@
   \input{clusterify}
   \input{conclusione}
   \input{ringraziamenti}
-  
-%  \bibliographystyle{plain}
-%  \bibliography{bibliography}
-  
-%  \input{appendices}
-
+  \bibliographystyle{plain}
+  \bibliography{biblio}
 \end{document}
