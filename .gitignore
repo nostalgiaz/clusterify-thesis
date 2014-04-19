@@ -4,6 +4,7 @@
 *.gz
 *.toc
 .useful_links
+TSWLatexianTemp*
 *.bib
 *.bbl
 *.blg
