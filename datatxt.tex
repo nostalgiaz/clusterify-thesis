@@ -1,14 +1,51 @@
-\chapter{dataTXT}
-dataTXT blabla
+\section{dataTXT}
+% https://www.mashape.com/dandelion/datatxt-1#!documentation
+DataTXT è un insieme di API semantiche sviluppate da SpazioDati S.r.l. che mirano a estrarre significato da testi scritti in diverse lingue. Questo prodotto si diversifica dagli altri dello stesso genere in quanto è stato pensato e ottimizzato per lavorare su testi molto corti, come i tweets.
 
-\section{Funzionamento}
-	funziona così...
+DataTXT, essendo appunto una famiglia di strumenti, esegue molti compiti: può ad esempio estrarre da un testo delle \emph{entità} oppure categorizzare dei documenti in categorie stabilite dall'utente stesso.
 
-\section{dataTXT API}
-	dataTXT ha delle API
+\subsection{Grafo di dataTXT}
+	DataTXT per poter eseguire i suoi algoritmi ha bisogno di basarsi su di un grafo pre-calcolato; questo ha $n+r$ nodi, dove $n$ sono gli snippet $S =  \{S_1, ..., S_n\}$ e $r$ sono i topic $T = \{t_1, ..., t_r\}$. 
 
-	\section{dataTXT NEX}
-		DataTXT NEX blabla
+Dato uno snippet $s$ e un topic $t$, denotiamo come $p(s,t)$ lo score che dataTXT assegna all'annotazione di $s$ con il topic $t$. Questo valore rappresenta l'importanza che un topic $t$ ha su di uno snippet $s$ e viene utilizzato come valore per l'arco da va da $s$ a $t$ nel grafo stesso.
 
-	\section{dataTXT REL}
-		DataTXT REL blabla
+	Dati due topic $t_a$ e $t_b$, per esempio due pagine di Wikipedia, si può misurare la loro \emph{relatedness} $rel(t_a, t_b)$ utilizzano la seguente funzione che si basta sul numero di citazioni e co-citazioni delle due pagine di Wikipedia:
+	\begin{equation*}
+	  rel(t_a, t_b) = \frac{log(| in(t_a) |) - log(| in(t_a) \cap in(t_b)|)}{log(W) - log(|in(t_b)|)}
+	\end{equation*}
+	dove $in(t)$ è il set di archi entranti nella pagina $t$ e $W$ è il numero totale delle pagine di Wikipedia\cite{datatxt_graph}.
+
+\subsection{dataTXT NEX}
+	DataTXT NEX è un servizio che permette di fare \emph{Named Entity eXtraction} da un 	testo. 
+
+	\subsubsection{Esempio di richiesta}
+		\url{https://api.dandelion.eu/datatxt/nex/v1/?lang=en&text=The%20doctor%20says%20an%20apple%20is%20better%20than%20an%20orange&include=type,abstract,categories,lod&$app_id=YOUR_APP_ID&$app_key=YOUR_APP_KEY}
+        \subsubsection{Esempio di risposta}
+		Nell'\emph{header} sono presenti molte informazioni utili quali...
+		
+		\begin{lstlisting}
+Connection: keep-alive
+Content-Length: 2748
+Content-Type: application/json;charset=UTF-8
+Date: Wed, 21 Oct 2015 16:29:37 GMT
+Server: Apache-Coyote/1.1
+X-DL-units: 1
+X-DL-units-left: 999
+X-DL-units-reset: 2015-10-22 00:00:00 +0000
+		\end{lstlisting}
+		Nel \emph{body}, invece, sono presenti i dati veri e propri
+		\begin{lstlisting}
+{     
+    "firstName": "John"
+    "lastName" : "Smith",
+    "age" : 25
+}
+		\end{lstlisting}
+
+	\subsubsection{Named entity extraction}
+		% http://en.wikipedia.org/wiki/Named-entity_recognition
+		bla
+	
+
+\subsection{dataTXT REL}
+	DataTXT REL blabla
