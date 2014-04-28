@@ -18,10 +18,13 @@ Dato uno snippet $s$ e un topic $t$, denotiamo come $p(s,t)$ lo score che dataTX
 \subsection{dataTXT NEX}
 	DataTXT NEX è un servizio che permette di fare \emph{Named Entity eXtraction} da un 	testo. 
 
+	\subsubsection{Named entity extraction}
+		Named entity extraction, anche conosciuto come Named entity recognition, è un processo che cerca di localizzare e, successivamente, di classificare elementi presenti in un testo in categorie predefinite, come ad esempio persone, organizzazioni, luoghi, espressioni di tempo, ecc \cite{named_enitity_extraction}.
+
 	\subsubsection{Esempio di richiesta}
 		\url{https://api.dandelion.eu/datatxt/nex/v1/?lang=en&text=The%20doctor%20says%20an%20apple%20is%20better%20than%20an%20orange&include=type,abstract,categories,lod&$app_id=YOUR_APP_ID&$app_key=YOUR_APP_KEY}
         \subsubsection{Esempio di risposta}
-		Nell'\emph{header} sono presenti molte informazioni utili quali...
+		Nell'\emph{header} sono presenti molte informazioni utili quali il numero di crediti utilizzati, quelli rimanente e la data in cui questi torneranno al valore iniziale.
 		
 		\begin{lstlisting}
 Connection: keep-alive
@@ -33,19 +36,53 @@ X-DL-units: 1
 X-DL-units-left: 999
 X-DL-units-reset: 2015-10-22 00:00:00 +0000
 		\end{lstlisting}
-		Nel \emph{body}, invece, sono presenti i dati veri e propri
+
+		Nel \emph{body}, invece, sono presenti i dati veri e propri. \emph{Annotations} è la lista composta dagli elementi trovati, con vari dettagli; questi elementi sono filtrati da alcuni parametri che possono essere passati nella richiesta,  ad esempio la \emph{min\_confidence}.
+
 		\begin{lstlisting}
-{     
-    "firstName": "John"
-    "lastName" : "Smith",
-    "age" : 25
+{
+  "timestamp": "2015-10-21T16:29:37",
+  "time": 2,
+  "lang": "en",
+  "annotations": [{
+      "...": "...",
+  }, {
+    "abstract": "The apple is the fruit of the apple tree...",
+    "id": 18978754,
+    "title": "Apple",
+    "start": 19,
+    "categories": [
+      "Apples",
+      "Malus",
+      "Plants described in 1803",
+      "Sequenced genomes"
+    ],
+    "lod": {
+      "wikipedia": "http://en.wikipedia.org/wiki/Apple",
+      "dbpedia": "http://dbpedia.org/resource/Apple"
+    },
+    "label": "Apple",
+    "types": [
+      "http://dbpedia.org/ontology/Eukaryote",
+      "http://dbpedia.org/ontology/Plant",
+      "http://dbpedia.org/ontology/Species"
+    ],
+    "confidence": 0.7869,
+    "uri": "http://en.wikipedia.org/wiki/Apple",
+    "end": 24,
+    "spot": "apple"
+  }, {
+    "...": "...",
+  }]
 }
 		\end{lstlisting}
 
-	\subsubsection{Named entity extraction}
-		% http://en.wikipedia.org/wiki/Named-entity_recognition
-		bla
-	
-
 \subsection{dataTXT REL}
-	DataTXT REL blabla
+	DataTXT REL  è un servizio che, ad oggi, non è ancora presente sul mercato, ma che permetterà di capire quando un topic $t_a$ è correlato ad un topic $t_b$, ricavando questo valore dalla formula utilizzata per la creazione degli archi pesati all'interno del grafo di dataTXT.
+
+\subsection{dataTXT *}
+	DataTXT è un progetto vivo ed in continua evoluzione, con l'uscita periodica di nuove funzionalità; su \url{https://dandelion.eu/products/datatxt/} si possono ottenere informazioni circa le novità.
+
+
+
+
