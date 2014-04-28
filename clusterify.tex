@@ -1,9 +1,115 @@
 \chapter{Clusterify}
-Clusterify blabla
+	Clusterify è un'applicazione web che offre agli utenti la possibilità di leggere i propri tweet suddivisi in insiemi definiti dinamicamente e in modo non supervisionato da un algoritmo di clustering precedentemente scelto.
 
-\section{Backend}
-	twython
-	funziona così...
+	Clusterify, come tutte le applicazioni web, è composta da due parti: \emph{frontend} e \emph{backend}.
 
 \section{Frontend}
-	funziona così...
+	Frontend
+
+\section{Backend}
+	Clusterify è un'applicazione Django\cite{django_project} costruita con l'idea di essere pluggabile, ovvero con la possibilità di inserire, con poco lavoro, nuovi \emph{reader} e nuovi algoritmi di clustering. Si può vedere il tutto come una struttura a \emph{Lego} dove si possono cambiare dei blocchi in modo da ottenere il risultato migliore, senza necessariamente modificare il codice del \emph{core}. Una volta stabiliti questi blocchi, clusterify farà il resto per calcolare i clusters dai dati dati in input.
+
+	\subsection{Reader}
+		Un reader è un oggetto che permette di caricare all'interno del workflow un insieme di testi da analizzare.
+
+		Per mezzo di questo oggetto è possibile leggere dati da qualsiasi fonte, che sia un social network, come nel nostro caso, da un file in memoria, piuttosto che da un database, implementando solamente il metodo $\_texts()$.
+
+		Questo metodo deve ritornare una lista di ennuple; ognuna di queste deve contenere testo, url (se esiste) e l'autore (se esiste).
+
+		\subsubsection{TwitterReader}
+			twitter reader
+
+	\subsection{Algoritmi di clustering}
+		Un algoritmo di clustering, come visto in precedenza, è un algoritmo che permette di raggruppare oggetti all'interno di un insieme, mantenendo uniti quelli che secondo alcune regole risultano più coesi.
+
+		Come per il \emph{reader}, anche questi algoritmi possono essere estesi con nuovi codici che implementano regole diverse, in modo da poter soddisfare qualsiasi richiesta. Clusterify nasce con tre algoritmi di clutering nel core, utili per valutare quale performava meglio nella suddivisione di topic definiti utilizzando dataTXT.
+
+		\subsubsection{Star}
+			star cluster
+
+		\subsubsection{Spectral}
+			spectral cluster
+
+		\subsubsection{Affinity Propagation}
+			affinity propagation
+		
+\section{Scelta dell'algoritmo di clustering}
+		Ho scelto di usare \{\} perché...
+
+\section{Workflow}
+	Clusterify non è altro che un sistema di \emph{pipe}, dove un comando viene eseguito prendendo come input l'output del precedente.
+
+	Come si è visto nel sezione relativa al \emph{processo di caricamento} nel capitolo \emph{frontend}, il workflow si può suddividere in tre parti:
+
+	\begin{enumerate}
+  		\item Acquisizione dei testi
+  		\item Annotazione dei testi
+ 		\item Clustering dei testi
+	\end{enumerate} 
+	
+	\subsection{Acquisizione dei testi}
+		La parte di acquisizione testi, come detto in \emph{reader} è una delle due parti pluggabili di Clusterify.
+
+		Questa fase si occupa del prendere i dati da una qualsivoglia fonte e di salvarli in modo conferme allo standard creato. All'interno di questa parte è possibile implementare, se necessario, un livello di cache in modo da impedire di richiedere più volte le stesse informazioni.
+
+		In Clusterify, \emph{TwitterReader} utilizza \emph{Twython}, una libreria Python che offre un accesso facile ai dati presenti su Twitter\cite{twython}. In altre parole, Twython offre un \emph{wrapper} alle API di Twitter, permettendo al programmatore di ottenere dati senza preoccuparsi della gestione errori, dell'aggiornamento delle API e quant'altro. 
+
+	\subsection{Annotazioni dei testi}
+		La seconda fase del workflow si occupa di annotare i testi per mezzo di dataTXT.
+		
+		Quest'operazione è fondamentale per un buon risultato finale in quanto questa può far incorrere nel riconoscimento di entità sbagliate; oppure, nel caso contrario, ci si può imbattere nell'estrazione di poche entità, ma molto precise. Avere troppe annotazioni sbagliate possono condurre nell'avere dei dati non veritieri; il contrario potrebbe portare a non avere nemmeno un entità estratta per testo analizzato e quindi, in fase di clustering, questi verrebbero persi.
+
+		Al programmatore è quindi chiesto di scegliere molto attentamente i parametri che verranno passati all'estrattore, per non finire in uno dei due casi.
+
+	\subsection{Clustering dei testi}
+		L'ultima fase la si può pensare suddivisa a sua volta in tre sotto fasi:
+
+		\begin{enumerate}
+  			\item Creazione matrice delle adiacenze
+  			\item Esecuzione dell'algoritmo di clustering
+ 			\item Uniformazione output
+		\end{enumerate} 
+
+		\subsubsection{Creazione matrice di adiacenza}
+			La maggior parte degli algoritmi di clustering necessita di un grafo pesato su cui operare. Questo è rappresentato per mezzo di una matrice delle adiacenze $N \times N$, ove $N$ è la cardinalità dell'insieme composto da tutte le entità, e viene costruita in questo modo:
+
+			\begin{equation*}
+				Adj(a, b) = \begin{cases} 
+					rel(a,b), & \mbox{se } a \neq b \\ 
+					0, & altrimenti 
+				\end{cases}
+			\end{equation*}
+			ove $Adj$ è la nostra matrice delle adiacenze, $a$ e $b$ sono i due topic e $rel(a,b)$ è la chiamata all'API dataTXT-REL che permette di capire quanto due entità sono correlate tra di loro.
+			
+			Si deduce che $Adj$ è una matrice speculare, con valori reali compresi tra $0$ e $1$, e che presenta $0$ sulla diagonale.
+
+		\subsubsection{Esecuzione dell'algoritmo di clustering}
+			Una volta generata la matrice delle adiacenze si può eseguire un algoritmo di clustering. Come già detto Clusterify permette di estendere gli algoritmi già presenti, quali \emph{Star}, \emph{Spectral}, \emph{Affinity Propagation}. Una volta stabilito l'algoritmo da utilizzare, Cluterify passerà a questo i vari dati e aspetterà l'esecuzione e il successivo output.
+
+		\subsubsection{Uniformazione output}
+			Dato l'output dell'algoritmo di clustering, i dati saranno processati nuovamente attraverso una funzione votata a due principali funzioni:
+			\begin{itemize}
+  				\item Rendere l'output conforme con il modello prestabilito
+	  			\item Aggiungere informazioni ad ogni componente del cluster
+ 			\end{itemize} 
+			
+			La prima si occuperà di portare la struttura dati uscente dall'algoritmo in quella stabilita da Clusterify; la seconda, invece, permette di aumentare l'informazione che questa contiene, aiutandosi con dati calcolati in precedenza o sul posto.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
