@@ -1,0 +1,29 @@
+K-means è il nome di un algoritmo di clustering che punta a creare $k$  gruppi distinti di uguale varianza, minimizzando l'inerzia del gruppo. Questo algoritmo richiede che il numero di cluster sia definito a priori. 
+
+L'algoritmo punta a scegliere $k$ centroidi $C$ che minimizzano lo scarto quadratico medio con un dataset $X$ di $n$ elementi $(x_1,..., x_n)$, creando $k$ insiemi $S = {S_1, ..., S_K}$:
+
+\begin{equation*}
+	\underset {\mathbf{S}} {\operatorname{arg\,min}}  \sum_{i=1}^{k} \sum_{\mathbf x_j \in S_i} || x_j - \mu_i ||^2 
+\end{equation*}
+
+L'algoritmo in se è composto da tre passi:
+\begin{enumerate}
+	\item Scelta dei centroidi iniziali;
+	\item Assegnamento di ogni componente;
+	\item Creazione di nuovi centroidi;
+\end{enumerate}
+
+Dopo aver scelto i primi $k$ centroidi dalle componenti del dataset $X$, l'algoritmo continua ad eseguire due operazioni finché i centroidi proposti possono essere considerati corretti, ovvero che la propria posizione non venga modificata con il passare delle iterazioni. 
+
+L'assegnamento di ogni componente ad un centroide si esegue utilizzando la distanza euclidea al quadrato, questa sarà assegnata al punto medio più vicino; si può calcolare la distribuzione delle componenti in questo modo:
+\begin{equation*}
+	S_i^{(t)} = \big \{ x_p : || x_p - m^{(t)}_i ||^2 \le || x_p - m^{(t)}_j ||^2 \ \forall j, 1 \le j \le k \big\}
+\end{equation*}
+dove ogni $x_p$ è assegnato a esattamente un $S^{(t)}$, anche se idealmente potrebbe essere assegnato a più di un centroide.
+
+La creazione dei nuovi centroidi utilizza, invece, il valore medio di ogni componente appartenente ad ogni centroide precedentemente definito.
+\begin{equation*}
+	m^{(t+1)}_i = \frac{1}{|S^{(t)}_i|} \sum_{x_j \in S^{(t)}_i} x_j 
+\end{equation*}
+
+Per quanto riguarda la scelta dei centroidi ci si può basare sul caso, scegliendo in modo \emph{random} i punti, con l'idea che con il passare delle iterazioni queste stime si sistemeranno; la seconda scelta vede il posizionamento dei centroidi in modo equidistante dagli tra loro, col fine di cercare di massimizzare l'area coperta e minimizzare il numero di iterazioni necessarie per giungere nella situazione finale di stallo.

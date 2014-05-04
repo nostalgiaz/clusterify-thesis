@@ -1,0 +1,21 @@
+Affinity Propagation è il nome di un algoritmo di clustering basato sul concetto di "passaggio di messaggi" tra le varie componenti. Una caratteristica fondamentale di quest'algoritmo è la mancanza di necessità di determinare a priori la quantità di cluster che saranno necessari\cite{affinity_description}.
+
+Un dataset è descritto utilizzando degli esemplari identificati come le componenti più rappresentative dell'insieme. I messaggi trasmessi tra coppie sono utilizzati per calcolare l'idoneità che una componente ha di essere l'esemplare dell'altra, la quale sarà successivamente aggiornata in risposta al valore delle altre coppie. Questo processo viene ripetuto iterativamente finché il tutto non converge, dando vita al cluster\cite{affinity_algorithm_scikit}.
+
+Sia $(x_1, ..., x_n)$ l'insieme dei punti da clusterizzare e sia $S$ una funzione che permette di definire la similarità di due punti.
+
+L'algoritmo procede alternando due passi di "passaggio di messaggi", aggiornando due matrici:
+
+\begin{itemize}
+	\item La matrice di responsabilità $R$ ha valori $r(i, k)$ che quantificano quanto $x_k$ sia ben situato nel cluster contenente $x_i$, prendendo in considerazione tutti gli altri elementi contenuti in questo insieme;
+	\item La matrice di disponibilità $A$ contiene i valori $a(i, k)$ rappresentanti quanto sia appropriato per $x_i$ scegliere $x_k$ come prossimo elemento del cluster a cui lui stesso appartiene.
+\end{itemize} 
+
+Entrambe queste matrici sono inizializzate a $0$ e, successivamente, saranno aggiornate in modo iterativo con le seguenti espressioni:
+\begin{align*}
+	r(i,k) &= s(i,k) - \max_{k' \neq k} \left\{ a(i,k') + s(i,k') \right\}\\
+	a(i,k) &= \min \left(0, r(k,k) + \sum_{i' \not\in \{i,k\}} \max(0, r(i',k)) \right) for i \neq k\\
+	a(k,k) &= \sum_{i' \neq k} \max(0, r(i',k))
+\end{align*}
+
+Il processo terminerà quando il tutto convergerà\cite{affinity_algorithm_wiki}.

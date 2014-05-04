@@ -17,21 +17,21 @@
 		Questo metodo deve ritornare una lista di ennuple; ognuna di queste deve contenere testo, url (se esiste) e l'autore (se esiste).
 
 		\subsubsection{TwitterReader}
-			twitter reader
+			TwitterReader, come dice il nome, è il reader che è stato implementato per poter ottenere i dati da Twitter; $\_texts()$, in questo caso, fa una richiesta a Twitter e, una volta ricevuti, formalizza i dati.
 
 	\subsection{Algoritmi di clustering}
 		Un algoritmo di clustering, come visto in precedenza, è un algoritmo che permette di raggruppare oggetti all'interno di un insieme, mantenendo uniti quelli che secondo alcune regole risultano più coesi.
 
 		Come per il \emph{reader}, anche questi algoritmi possono essere estesi con nuovi codici che implementano regole diverse, in modo da poter soddisfare qualsiasi richiesta. Clusterify nasce con tre algoritmi di clutering nel core, utili per valutare quale performava meglio nella suddivisione di topic definiti utilizzando dataTXT.
 
-		\subsubsection{Star}
-			star cluster
+		\subsubsection{K-Means}
+			\input{kmeans}
 
 		\subsubsection{Spectral}
-			spectral cluster
+			\input{spectral}
 
 		\subsubsection{Affinity Propagation}
-			affinity propagation
+			\input{affinity}
 		
 \section{Scelta dell'algoritmo di clustering}
 		Ho scelto di usare \{\} perché...
