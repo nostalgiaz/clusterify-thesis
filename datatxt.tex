@@ -1,10 +1,10 @@
-\section{dataTXT}
+\subsection{dataTXT}
 % https://www.mashape.com/dandelion/datatxt-1#!documentation
 DataTXT è un insieme di API semantiche sviluppate da SpazioDati S.r.l. che mirano a estrarre significato da testi scritti in diverse lingue. Questo prodotto si diversifica dagli altri dello stesso genere in quanto è stato pensato e ottimizzato per lavorare su testi molto corti, come i tweets.
 
 DataTXT, essendo appunto una famiglia di strumenti, esegue molti compiti: può ad esempio estrarre da un testo delle \emph{entità} oppure categorizzare dei documenti in categorie stabilite dall'utente stesso.
 
-\subsection{Grafo di dataTXT}
+\subsubsection{Grafo di dataTXT}
 	DataTXT per poter eseguire i suoi algoritmi ha bisogno di basarsi su di un grafo pre-calcolato; questo ha $n+r$ nodi, dove $n$ sono gli snippet $S =  \{S_1, ..., S_n\}$ e $r$ sono i topic $T = \{t_1, ..., t_r\}$. 
 
 Dato uno snippet $s$ e un topic $t$, denotiamo come $p(s,t)$ lo score che dataTXT assegna all'annotazione di $s$ con il topic $t$. Questo valore rappresenta l'importanza che un topic $t$ ha su di uno snippet $s$ e viene utilizzato come valore per l'arco da va da $s$ a $t$ nel grafo stesso.
@@ -15,7 +15,7 @@ Dato uno snippet $s$ e un topic $t$, denotiamo come $p(s,t)$ lo score che dataTX
 	\end{equation*}
 	dove $in(t)$ è il set di archi entranti nella pagina $t$ e $W$ è il numero totale delle pagine di Wikipedia\cite{datatxt_graph}.
 
-\subsection{dataTXT NEX}
+\subsubsection{dataTXT NEX}
 	DataTXT NEX è un servizio che permette di fare \emph{Named Entity eXtraction} da un 	testo. 
 
 	\subsubsection{Named entity extraction}
@@ -77,10 +77,10 @@ X-DL-units-reset: 2015-10-22 00:00:00 +0000
 }
 		\end{lstlisting}
 
-\subsection{dataTXT REL}
+\subsubsection{dataTXT REL}
 	DataTXT REL  è un servizio che, ad oggi, non è ancora presente sul mercato, ma che permetterà di capire quando un topic $t_a$ è correlato ad un topic $t_b$, ricavando questo valore dalla formula utilizzata per la creazione degli archi pesati all'interno del grafo di dataTXT.
 
-\subsection{dataTXT *}
+\subsubsection{dataTXT *}
 	DataTXT è un progetto vivo ed in continua evoluzione, con l'uscita periodica di nuove funzionalità; su \url{https://dandelion.eu/products/datatxt/} si possono ottenere informazioni circa le novità.
 
 
