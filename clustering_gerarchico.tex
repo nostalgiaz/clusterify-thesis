@@ -1,0 +1,30 @@
+\section{Clustering gerarchico}
+	Gli algoritmi di clustering gerarchico, invece, creano una rappresentazione gerarchia ad albero dei cluster.
+	Le strategie sono tipicamente di due tipi: 
+	\begin{itemize}
+		\item Metodo agglomerativo \emph{(bottom-up)} \\
+		Con un cluster per ogni oggetto si procede con l'unione di questi, basando la selezione degli insiemi da unire ad una \emph{funzione di similarità}.
+
+		\item Metodo divisivo \emph{(top-down)} \\
+		Con un unico cluster contente tutti gli oggetti si va, via via, a suddividerlo basando la scelta della selezione dell'insieme da dividere ad una \emph{funzione di similarità}. 		
+	\end{itemize}
+
+	Questa tipologia di algoritmi necessita anche di un criterio di collegamento che specifica la dissimilarità di due insiemi utilizzando la distanza valutabile tra gli stessi insiemi. Questi criteri possono essere: 
+	\begin{itemize}
+		\item Complete linkage: distanza massima tra elementi appartenenti ai due clusters
+			\begin{equation*}
+				\max \, \{\, d(a,b) : a \in C_1,\, b \in C_2 \,\}
+			\end{equation*}
+		\item Minimum o single-linkage: distanza minima tra elementi appartenenti a cluster diversi
+			\begin{equation*}
+			 	\min \, \{\, d(a,b) : a \in C_1,\, b \in C_2 \,\}
+			\end{equation*}
+
+		\item Average linkage: la media delle distanze dei singoli elementi
+			\begin{equation*}
+				\frac{1}{|C_1| |C_2|} \sum_{a \in C_1 }\sum_{ b \in C_2} d(a,b). 
+			\end{equation*}
+	\end{itemize}
+	con $C_1$ e $C_2$ i due cluster da unire e $d$ la metrica prescelta.
+
+	Gli algoritmi più famosi appartenenti questa categoria sono SLINK (single-linkage) e CLINK (complete-linkage)\cite{clustering_gerarchico}.

@@ -1,0 +1,10 @@
+\section{Clustering density-based}
+	Negli algoritmi di clustering density-based, il raggruppamento avviene analizzando l'intorno di ogni punto dello spazio, connettendo regioni di punti con densità sufficientemente alta\cite{Density_based_clustering}.
+		
+	Gli algoritmi density-based hanno avuto un ruolo vitale nel trovare strutture non lineari basandosi sulla densità. Questi sono concepiti su due concetti: \emph{density reachability} e \emph{density connectivity}.
+
+	Il primo afferma che un punto $p$ è \emph{density reachable} da un punto $q$ se il punto $p$ è distante al più $\epsilon$ dal punto $q$ e lo stesso $q$ ha un sufficiente numero di punti nei suoi vicini che hanno almeno distanza $\epsilon$\cite{density_based_concept}. 
+
+	Il secondo, invece, afferma che un punto $p$ e un punto $q$ sono detti \emph{density connected} se esiste un punto $r$ che ha un numero sufficiente di punti nei suoi vicini ed entrambi i punti $p$ e $q$ hanno al più distanza $\epsilon$ da $r$. Da questo si può dedurre che, se $q$ è un vicino di $r$, $r$ è vicino di $s$, $s$ è vicino di $t$ e $t$ è a sua volta vicino di $p$, $q$ è vicino di $p$\cite{density_based_concept}.
+
+	L'algoritmo più famoso appartenente a questa categoria è senz'altro DBSCAN.

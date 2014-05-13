@@ -1,117 +1,39 @@
 \chapter{Clusters e clustering}
+	Con il nome di \emph{clustering} si definisce una tecnica di raggruppamento non supervisionato di oggetti in insiemi, secondo determinate regole, dove gli appartenenti allo stesso \emph{cluster} sono più simili di quelli contenuti negli altri gruppi. La \emph{cluster analysis} è diventata una componente molto importante dell'analisi dei dati, sia in campo scientifico che industriale. Quando un insieme di dati deve essere organizzato, questa tecnica assegna ogni punto ad un gruppo utilizzando strutture presenti nei \emph{row data}.
 
-Il \emph{clustering} è una tecnica di raggruppamento di oggetti in insiemi, secondo determinate regole, con l'intento che gli appartenenti allo stesso \emph{cluster} siano più simili di quelli contenuti negli altri gruppi.
+	L'apprendimento non supervisionato è una tecnica che consiste nel fornire al sistema una serie di dati in input che, successivamente, riclassificherà ed organizzerà sulla base di caratteristiche che gli oggetti in questione hanno in comune, senza avere bisogno di ulteriori informazioni\cite{apprendimento_non_supervisionato}.
 
-Queste regole tendono a minimizzare la \emph{distanza} interna a ciascun gruppo ed a massimizzare quella tra i gruppi stessi: questa distanza viene quantificata per mezzo di misure di similarità.
+	Queste regole tendono a minimizzare la \emph{distanza} interna a ciascun gruppo ed a massimizzare quella tra i gruppi stessi.
 
-La distanza è una qualsiasi funzione $d:X \times X \to \mathbb{R}$ che soddisfa:
-\begin{align*}
-	d(x,y) &\geq 0 \\
-	d(x,y) &= 0 \iff x=y \\
-	d(x,y) &= d(y,x) \\
-	d(x,y) &\leq d(x,z) + d(z,y)
-\end{align*}
+	La distanza (o \emph{metrica}) è una qualsiasi funzione $d:X \times X \to \mathbb{R}$ che soddisfa\cite{definizione_di_distanza}:
+	\begin{align*}
+		d(x,y) &\geq 0 \\
+		d(x,y) &= 0 \iff x=y \\
+		d(x,y) &= d(y,x) \\
+		d(x,y) &\leq d(x,z) + d(z,y)
+	\end{align*}
 
-Non esiste un solo algoritmo per raggruppare in modo corretto, bensì un solo compito da portare a termine. Questo obiettivo può essere raggiunto in più modi, basandosi su qualsivoglia tipo di nozione col solo fine di raggruppare in modo efficiente e sensato gli oggetti dati. 
+	La scelta della metrica influenza drasticamente la forma dei cluster poiché i rapporti tra le varie distanze possono cambiare radicalmente. Tra le metriche più comuni sono presenti la \emph{distanza euclidea} e la \emph{distanza di Manhattan}\cite{metriche}.
 
-Esistono molteplici nozioni a cui ci si può ispirare per l'atto del raggruppamento; la creazione di gruppi caratterizzati da una piccola distanza tra i propri membri, piuttosto che l'utilizzo di particolari distribuzioni statistiche.
+	Non esiste un solo algoritmo per raggruppare in modo corretto. Questo obiettivo può essere raggiunto in più modi, basandosi su qualsivoglia tipo di nozione col solo fine di raggruppare in modo efficiente e sensato gli oggetti dati. 
 
-Seppur non esista non solo modo per fare clustering, molti di questi algoritmi godono di alcuni tratti in comune che definiscono i così detti \emph{modelli}.
+	Esistono molteplici nozioni a cui ci si può ispirare per il raggruppamento: dalla creazione di gruppi caratterizzati da una piccola distanza tra i singoli membri, piuttosto che dall'utilizzo di particolari distribuzioni statistiche.
 
-I modelli di clustering tipici sono:
-\begin{itemize}
-	\item Clustering partizionale 
-	\item Clustering gerarchico 
-	\item Clustering density-based 
-\end{itemize}
+	Seppur non esista non solo modo per fare clustering, molti di questi algoritmi godono di alcuni tratti in comune che definiscono i così detti \emph{modelli}.
 
-\section{Clustering partizionale}
-	% http://en.wikipedia.org/wiki/Cluster_analysis#Centroid-based_clustering
-	
-	Gli algoritmi di clustering di questa famiglia creano una partizione delle osservazioni minimizzando la seguente funzione di costo:
-	\begin{equation*}
-	  \sum_{j=1}^{k}E(C_j)
-	\end{equation*}
-	ove $k$ è il numero dei cluster richiesti in output, $C_j$ è il j-esimo cluster e $E:C \rightarrow R^{+}$ è la funzione di costo associata al singolo cluster.
-
-	Questa tipologia di algoritmi solitamente richiede all'utente di specificare $k$, il numero di cluster distinti che si vogliono raggiungere a processo terminato, e mira ad identificare i gruppi naturali presenti nel dataset, generando una partizione composta da cluster disgiunti la cui unione ritorna il dataset originale.
-	
-	\subsection{Algoritmi conosciuti}
-		Gli algoritmi più famosi appartenenti questa categoria sono: 
-		\begin{itemize}
-		  	\item k-means
-		  	\item k-medoids
-		  	\item CLARANS
-		\end{itemize}
-
-\section{Clustering gerarchico}
-    % http://en.wikipedia.org/wiki/Cluster_analysis#Connectivity_based_clustering_.28hierarchical_clustering.29
-
-	Gli algoritmi di clustering gerarchico, invece, creano una rappresentazione gerarchia ad albero dei cluster.
-	Le strategie per il clustering gerarchico sono tipicamente di due tipi: 
+	I modelli di clustering tipici sono:
 	\begin{itemize}
-		\item Agglomerativo
-		\item Divisivo
+		\item Partizionale
+		\item Gerarchico
+		\item Spectral
+		\item Altri modelli
+%		\item Density-based 
+%		\item Distribution-based 
 	\end{itemize}
-	
-	\subsection{Metodo agglomerativo}
-		Il metodo agglomerativo segue un approccio \emph{bottom up} al problema dove, inizialmente, si ha un cluster per ogni oggetto e, successivamente, si procede all'unione di questi cluster, basando la selezione dei cluster da unire ad una \emph{funzione di similarità}.
 
-	\subsection{Metodo divisivo}
-		Il metodo divisivo, invece, segue un approccio \emph{top down} al problema dove, inizialmente, si ha un unico cluster contente tutti gli oggetti e, via via, viene suddiviso in più sotto-cluster, basando la selezione del cluster da dividere ad una \emph{funzione di similarità}. Solitamente si impone un numero minimo di elementi che ogni cluster deve contenere alla fine del processo. 
-
-	\subsection{Dissimilarità tra cluster}
-		Nella maggior parte dei metodi di clustering gerarchico si fa uso di metriche specifiche che quantificano la distanza tra coppie di elementi e di un criterio di collegamento che specifica la dissimilarità di due insiemi di elementi (cluster) come funzione della distanza a coppie tra elementi nei due insiemi.
-
-	\subsection{Metriche}
-		La scelta della metrica influenza la forma dei cluster, poiché alcuni elementi possono essere più vicini utilizzando una data distanza e più lontani utilizzandone un'altra.
-
-		Le metriche comuni sono le seguenti:
-		\begin{itemize}
-		  	\item Distanza euclidea
-		  	\item Distanza di Manhattan
-		\end{itemize}
-
-	\subsection{Criteri di collegamento}
-		Il criterio di collegamento specifica la distanza tra insiemi di elementi come funzione di distanze tra gli elementi negli insiemi.
-		I criteri di collegamento comuni sono i seguenti:
-		\begin{itemize}
-			\item Complete linkage: calcola la distanza tra i due cluster come la distanza massima tra elementi appartenenti ai due clusters
-			\item Minimum o single-linkage: calcola la distanza tra i due cluster come la distanza minima tra elementi appartenenti a cluster diversi
-			\item Average linkage: calcola la distanza tra i due cluster come la media delle distanze tra i singoli elementi
-		\end{itemize}
-
-	\subsection{Algoritmi conosciuti}
-		Gli algoritmi più famosi appartenenti questa categoria sono:
-		\begin{itemize}
-			\item SLINK \emph{(single-linkage)}
-		  	\item CLINK \emph{(complete-linkage)}
-		\end{itemize}
-
-\section{Clustering density-based}
-	% http://en.wikipedia.org/wiki/Cluster_analysis#Density-based_clustering
-	Negli algoritmi di clustering density-based il raggruppamento avviene analizzando l'intorno di ogni punto dello spazio, connettendo regioni di punti con densità sufficientemente alta.
-	
-	\subsection{Algoritmi conosciuti}		
-		Gli algoritmi più famosi appartenenti questa categoria sono:
-		\begin{itemize}
-		  	\item DBSCAN
-		\end{itemize}
-
-\section{Clustering distribution-based}
-	% http://en.wikipedia.org/wiki/Cluster_analysis#Distribution-based_clustering
-	Questa tipologia di algoritmi è quella più vicina alla statistica. I cluster possono essere definiti come l'insieme di oggetti che appartengono, probabilmente, alla stessa distribuzione.
-
-	Anche  se dal punto teorico questi modelli sono eccellenti, soffrono di un problema chiave chiamato \emph{overfitting}. 
-
-	\subsection{Overfitting}
-		Si parla di overfitting quando un modello statistico si adatta ai dati osservati utilizzando un numero eccessivo di parametri. Un modello sbagliato può adattarsi perfettamente se è abbastanza complesso rispetto alla quantità di dati disponibili. 
-
-		Questo concetto è presente anche nell'apprendimento automatico e nel data mining. Un algoritmo che prevedere apprendimento viene allenato usando un training set e si assume che quest'algoritmo raggiungerà uno stato in cui sarà in grado di prevedere gli output per tutti gli altri esempi. Tuttavia, è possibile che un apprendimento svolto in modo sbagliato, il modello potrebbe adattarsi a caratteristiche che sono specifiche del training set, ma che non hanno riscontro nel resto dei casi.
-
-	\subsection{Algoritmi conosciuti}
-		Gli algoritmi più famosi appartenenti questa categoria sono:
-		\begin{itemize}
-			\item Expectation–maximization
-		\end{itemize}
-
+	\input{clustering_partizionale}
+	\input{clustering_gerarchico}
+	\input{clustering_spectral}
+	\input{clustering_altri_modelli}
+%	\input{clustering_distribution_based}
+%	\input{clustering_density_based}

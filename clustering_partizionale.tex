@@ -1,0 +1,25 @@
+\section{Clustering partizionale}
+	Gli algoritmi di clustering di questa famiglia creano una partizione delle osservazioni minimizzando la funzione di costo:
+	\begin{equation*}
+	  \sum_{i=1}^{k}{E(C_i)}
+	\end{equation*}
+	ove $k$ è il numero dei cluster richiesti in output, $C_i$ è l'$i$-esimo cluster e $E:C \rightarrow R^{+}$ è la funzione di costo associata al singolo cluster\cite{clustering_partizionale}.
+
+	Questa funzione viene spesso tradotta in\cite{funzione_costo}:
+	\begin{equation*}
+	  	E(C_i) = \sum_{j=1}^{|C_i|}{dist(x_j, center(i))}
+	\end{equation*}
+dove $|C_i|$ è il numero di oggetti presenti nel cluster $i$ e $dist(x_j, center(i))$ è una funzione che calcola la distanza tra il punto $x_j$ ed il centro del cluster $i$-esimo.
+
+	Questa tipologia di algoritmi solitamente richiede di specificare il numero di cluster distinti che si vogliono raggiungere a processo terminato e mira ad identificare i gruppi naturali presenti nel dataset, generando una partizione composta da cluster disgiunti la cui unione forma il dataset originale.
+
+	Questo significa che ogni cluster ha almeno un elemento e che un elemento appartiene ad un solo cluster.
+
+	Per segmentare l'insieme in sottogruppi si utilizza il concetto di centri, inizialmente posizionati in modo casuale, o secondo un qualsivoglia algoritmo, e iterativamente mossi fino a che questi raggiungono uno stato di fermo. Quando ciò accade si è in grado di definire a che centro appartiene il singolo punto e, di conseguenza, la struttura dei cluster calcolati. 
+
+	Gli algoritmi più famosi appartenenti questa categoria sono: 
+	\begin{itemize}
+	  	\item K-means
+	  	\item K-medoids
+	  	\item Affinity Propagation
+	\end{itemize}

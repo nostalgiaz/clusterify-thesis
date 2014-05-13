@@ -1,15 +1,18 @@
 \chapter{Clusterify}
-	Clusterify è un'applicazione web che offre agli utenti la possibilità di leggere i propri tweet suddivisi in insiemi definiti dinamicamente e in modo non supervisionato da un algoritmo di clustering precedentemente scelto.
+	Clusterify è un'applicazione web che offre agli utenti la possibilità di leggere gli stessi tweet che leggerebbero sul \emph{newsfeed} dello stesso Twitter, suddivisi però in insiemi definiti dinamicamente in modo da permettere loro di soffermarsi solamente su testi appartenenti alle categorie che questi reputano importanti. L'idea di quest'applicazione è nata dal bisogno di voler leggere solo in parte i tweet che una data persona pubblica. 
 
-	Clusterify, come tutte le applicazioni web, è composta da due parti: \emph{frontend} e \emph{backend}.
+	Supponiamo che un utente $X$, aspirante cuoco, segua $Y$, cuoca di grande importanza e neo-mamma, e che quest'ultima pubblichi questi due tweet:
+	\begin{inparaenum}[\itshape a\upshape)]
+		\item \#Plumcake alla \#Nutella: continuano gli esperimenti @GialloZafferano ;)
+		\item Giocare una battaglia a \#palledineve e perdere con il proprio piccolo di 3 anni <3
+	\end{inparaenum}.
+	$X$ probabilmente sarà molto interessato alla ricetta del \emph{Plumcake} ma, al contempo, non attirato dalla vita personale di $Y$.
+
+	Clusterify dividerà questi due tweet in due gruppi distinti e, così, $X$ avrà la possibilità di leggere tutti i tweet riferiti ad ambiti culinari in un unico gruppo senza essere disturbato da storie di vita personale, recensioni di film e quant'altro.
 
 \section{Background}
-	blabla
 	\input{twitter}
 	\input{datatxt}
-
-\section{Frontend}
-	Frontend
 
 \section{Backend}
 	Clusterify è un'applicazione Django\cite{django_project} costruita con l'idea di essere pluggabile, ovvero con la possibilità di inserire, con poco lavoro, nuovi \emph{reader} e nuovi algoritmi di clustering. Si può vedere il tutto come una struttura a \emph{Lego} dove si possono cambiare dei blocchi in modo da ottenere il risultato migliore, senza necessariamente modificare il codice del \emph{core}. Una volta stabiliti questi blocchi, clusterify farà il resto per calcolare i clusters dai dati dati in input.
@@ -27,7 +30,7 @@
 	\subsection{Algoritmi di clustering}
 		Un algoritmo di clustering, come visto in precedenza, è un algoritmo che permette di raggruppare oggetti all'interno di un insieme, mantenendo uniti quelli che secondo alcune regole risultano più coesi.
 
-		Come per il \emph{reader}, anche questi algoritmi possono essere estesi con nuovi codici che implementano regole diverse, in modo da poter soddisfare qualsiasi richiesta. Clusterify nasce con tre algoritmi di clutering nel core, utili per valutare quale performava meglio nella suddivisione di topic definiti utilizzando dataTXT.
+		Come per il \emph{reader}, anche questi algoritmi possono essere estesi con nuovi codici che implementano regole diverse, in modo da poter soddisfare qualsiasi richiesta. Clusterify nasce con tre algoritmi di clustering nel core, utili per valutare quale performava meglio nella suddivisione di topic definiti utilizzando dataTXT.
 
 		\subsubsection{K-Means}
 			\input{kmeans}
@@ -39,7 +42,7 @@
 			\input{affinity}
 		
 \section{Scelta dell'algoritmo di clustering}
-		Ho scelto di usare \{\} perché...
+	\input{scelta_algoritmo}
 
 \section{Workflow}
 	Clusterify non è altro che un sistema di \emph{pipe}, dove un comando viene eseguito prendendo come input l'output del precedente.
@@ -100,21 +103,5 @@
 			
 			La prima si occuperà di portare la struttura dati uscente dall'algoritmo in quella stabilita da Clusterify; la seconda, invece, permette di aumentare l'informazione che questa contiene, aiutandosi con dati calcolati in precedenza o sul posto.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+\section{Frontend}
+	Frontend

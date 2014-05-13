@@ -1,0 +1,23 @@
+\section{Clustering spectral}
+	Questa tipologia nasce dal bisogno di eliminare delle mancanze che colpiscono gli altri metodi. 
+
+	I metodi partizionali riescono a creare cluster solamente di forma sferica, basandosi, come abbiamo già visto, su un concetto di centro; al contrario i metodi density-based hanno un approccio troppo sensibile ai parametri dati.
+
+	Per risolvere questi problemi si utilizza un grafo di similarità con vertici le componenti da clusterizzare e, come valore degli archi, la similarità delle componenti tra cui è sotteso.
+
+	Una volta creato il grafo si procede con una serie di tagli minimi, che possono essere trovati in questo modo:
+
+	\begin{equation*}
+		NormCut(C_1, C_2) =  \frac{Cut(C_1, C_2)}{Vol(C_1)} + \frac{Cut(C_1, C_2)}{Vol(C_2)}
+	\end{equation*}
+	dove $C_1$, $C_2$ sono due gruppi di nodi,  $w_{ij}$ il peso dell'arco sotteso tra $i$ e $j$, $Cut$ e $Vol$ definito come segue:
+
+	\begin{equation*}
+		Cut(C_1, C_2) = \sum_{i \in C_1, j \in C_2} {w_{ij}}
+	\end{equation*}
+
+	\begin{equation*}
+		Vol(C) = \sum_{i \in C, j \in V} {w_{ij}}
+	\end{equation*}
+
+	L'algoritmo più famoso appartenente a questa categoria è senz'altro Spectral.

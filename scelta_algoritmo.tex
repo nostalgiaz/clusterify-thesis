@@ -1,0 +1,81 @@
+%\input{grafico}
+\catcode`\_=12 % category other
+\begin{tikzpicture}
+	\begin{axis} [
+   	 	ybar,
+		width=12cm,
+	        	height=8cm,
+        		ymin=0,
+	  	ymax=150,  
+		bar width=5pt,
+        		legend columns=3,
+    		legend style={draw=none,nodes={inner sep=3pt}},,
+    		ylabel={\% successo},
+    		symbolic x coords={
+    			MartinBrugrara,
+    			AndreaDellera,
+    			gi4n1uc4,
+    			apheniti,
+    			john_frigo,
+		    	edorigatti,
+			cosaunlama,
+			michelaelle,
+			SpiritualGuru,
+			carlotta_93
+    		},
+    		xtick=data,
+    		nodes near coords,
+    		nodes near coords align={vertical},
+		nodes near coords={
+			\pgfmathprintnumber[fixed zerofill, precision=2]{\pgfplotspointmeta}
+		},
+		every node near coord/.append style={
+			font=\tiny,
+			anchor=west,
+                		rotate=90
+        		},
+		x tick label style={rotate=45,anchor=east},
+    	]
+		\addplot coordinates {
+			(MartinBrugrara, 89.61) 
+			(AndreaDellera, 71.72) 
+			(gi4n1uc4, 85.81)
+			(apheniti, 77.02)
+			(john_frigo, 94.47)
+			(edorigatti, 81.56)
+			(cosaunlama, 79.00)
+			(michelaelle, 76.43)
+			(SpiritualGuru, 81.04)
+			(carlotta_93, 74.23)
+		};
+		\addplot coordinates {
+			(MartinBrugrara, 57.08) 
+			(AndreaDellera, 55.56) 
+			(gi4n1uc4, 56.89)
+			(apheniti, 64.60)
+			(john_frigo, 59.87)
+			(edorigatti, 57.96)
+			(cosaunlama, 58.86)
+			(michelaelle,  57.15)
+			(SpiritualGuru, 56.46)
+			(carlotta_93, 65.06)
+		};
+		\addplot coordinates {
+			(MartinBrugrara, 64.26) 
+			(AndreaDellera, 67.84) 
+			(gi4n1uc4, 65.23)
+			(apheniti, 64.77)
+			(john_frigo, 61.94)
+			(edorigatti, 61.73)
+			(cosaunlama, 67.00)
+			(michelaelle,  64.50)
+			(SpiritualGuru, 62.50)
+			(carlotta_93, 71.69)
+		};
+		\legend{Affinity Propagation, Specral, Hierarchical}
+	\end{axis}
+\end{tikzpicture}
+\catcode`\_=8 % category subscript
+
+Affinity Propagation!
+
