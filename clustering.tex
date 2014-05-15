@@ -1,7 +1,7 @@
 \chapter{Clusters e clustering}
-	Con il nome di \emph{clustering} si definisce una tecnica di raggruppamento, non supervisionato, di oggetti in insiemi secondo determinate regole; gli appartenenti allo stesso \emph{cluster} sono più simili di quelli contenuti negli altri gruppi. La \emph{cluster analysis} è diventata una componente molto importante nell'analisi dei dati, sia in campo scientifico che industriale. Quando un insieme di dati deve essere organizzato, questa tecnica assegna ogni punto ad un gruppo utilizzando strutture presenti nei \emph{row data}.
+	Con il nome di \emph{clustering} si definisce la tecnica non supervisionata utile al raggruppamento di oggetti in insiemi secondo determinate regole. Gli elementi appartenenti allo stesso \emph{cluster} sono più simili tra loro rispetto che a quelli contenuti negli altri gruppi. La \emph{cluster analysis} è diventata una componente molto importante nell'analisi dei dati, sia in campo scientifico che industriale. Quando un insieme di dati deve essere organizzato, questa tecnica assegna ogni punto ad un gruppo utilizzando strutture presenti nei \emph{row data}.
 
-	L'apprendimento non supervisionato è una tecnica che consiste nel fornire al sistema una serie di dati in input che, successivamente, riclassificherà ed organizzerà sulla base di caratteristiche che questi oggetti hanno in comune senza avere bisogno di ulteriori informazioni\cite{apprendimento_non_supervisionato}.
+	L'apprendimento non supervisionato è una tecnica che consiste nel fornire al sistema una serie di dati in input che, successivamente, riclassificherà ed organizzerà sulla base di caratteristiche che questi oggetti hanno in comune senza avere bisogno di ulteriori informazioni.
 
 	Queste regole tendono a minimizzare la \emph{distanza} interna a ciascun gruppo ed a massimizzare quella tra i gruppi stessi.
 
@@ -13,13 +13,13 @@
 		d(x,y) &\leq d(x,z) + d(z,y)
 	\end{align*}
 
-	La scelta della metrica influenza drasticamente la forma dei cluster poiché i rapporti tra le varie distanze possono cambiare radicalmente. Tra le metriche più comuni sono presenti la \emph{distanza euclidea} e la \emph{distanza di Manhattan}\cite{metriche}.
+	La scelta della metrica influenza drasticamente la forma dei cluster poiché i rapporti tra le varie distanze possono cambiare totalmente. Tra le metriche più comuni sono presenti la \emph{distanza euclidea} e la \emph{distanza di Manhattan}.
 
-	Non esiste un solo algoritmo per raggruppare in modo corretto. Questo obiettivo può essere raggiunto in più modi, basandosi su qualsivoglia tipo di nozione col solo fine di raggruppare in modo efficiente e sensato gli oggetti dati. 
+	Non esiste un algoritmo in grado di raggruppare qualsiasi dato in modo più corretto rispetto ad un altro, infatti esistono tecniche specifiche per ogni tipologia di dato, da quello statistico a quello sociale.
 
-	Esistono molteplici nozioni a cui ci si può ispirare per il raggruppamento: dalla creazione di gruppi caratterizzati da una piccola distanza tra i singoli membri, piuttosto che dall'utilizzo di particolari distribuzioni statistiche.
+	Ci si può ispirare a molteplici nozioni per il raggruppamento: dalla creazione di gruppi caratterizzati da una piccola distanza tra i singoli membri, all’utilizzo di particolari distribuzioni statistiche.
 
-	Seppur non esista non solo modo per fare clustering, molti di questi algoritmi godono di alcuni tratti in comune che definiscono i così detti \emph{modelli}.
+	Molti degli algoritmi usati per fare clustering godono di alcuni tratti in comune che ci portano a definire i \emph{modelli}.
 
 	I modelli di clustering tipici sono:
 	\begin{itemize}

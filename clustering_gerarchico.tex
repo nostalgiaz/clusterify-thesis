@@ -3,15 +3,15 @@
 	Le strategie sono tipicamente di due tipi: 
 	\begin{itemize}
 		\item Metodo agglomerativo \emph{(bottom-up)} \\
-		Con un cluster per ogni oggetto si procede con l'unione di questi, basando la selezione degli insiemi da unire ad una \emph{funzione di similarità}.
+		Con un cluster per ogni oggetto si procede con l'unione di questi, basando la selezione degli insiemi da unire su una \emph{funzione di similarità}.
 
 		\item Metodo divisivo \emph{(top-down)} \\
-		Con un unico cluster contente tutti gli oggetti si va, via via, a suddividerlo basando la scelta della selezione dell'insieme da dividere ad una \emph{funzione di similarità}. 		
+		Partendo da un unico cluster contenente tutti li oggetti, lo si divide basando la scelta della selezione dell’insieme da dividere su una \emph{funzione di similarità}.
 	\end{itemize}
 
-	Questa tipologia di algoritmi necessita anche di un criterio di collegamento che specifica la dissimilarità di due insiemi utilizzando la distanza valutabile tra gli stessi insiemi. Questi criteri possono essere: 
+	Questa tipologia di algoritmi necessita anche di alcuni criteri di collegamento che specifica la dissimilarità di due insiemi utilizzando la distanza valutabile tra gli stessi insiemi. Questi criteri possono essere: 
 	\begin{itemize}
-		\item Complete linkage: distanza massima tra elementi appartenenti ai due clusters
+		\item Complete linkage: distanza massima tra elementi appartenenti a due cluster
 			\begin{equation*}
 				\max \, \{\, d(a,b) : a \in C_1,\, b \in C_2 \,\}
 			\end{equation*}

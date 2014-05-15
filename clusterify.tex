@@ -1,16 +1,20 @@
 \chapter{Clusterify}
-	Clusterify è un'applicazione web che offre agli utenti la possibilità di leggere gli stessi tweet che leggerebbero sul \emph{newsfeed} dello stesso Twitter, suddivisi però in insiemi definiti dinamicamente in modo da permettere loro di soffermarsi solamente su testi appartenenti alle categorie che questi reputano importanti. L'idea di quest'applicazione è nata dal bisogno di voler leggere solo in parte i tweet che una data persona pubblica. 
+	Clusterify è un'applicazione web che offre agli utenti la possibilità di leggere gli stessi tweet che leggerebbero sul loro \emph{newsfeed}, organizzati, però, in insiemi definiti dinamicamente in modo da permettere loro di soffermarsi solamente su testi appartenenti a categorie che questi reputano interessanti. L'idea di quest'applicazione è nata dal bisogno di non voler leggere tutti i tweet che una determinata persona pubblica. 
 
-	Supponiamo che un utente $X$, aspirante cuoco, segua $Y$, cuoca di grande importanza e neo-mamma, e che quest'ultima pubblichi questi due tweet:
-	\begin{inparaenum}[\itshape a\upshape)]
+	Supponiamo che un utente $X$, aspirante cuoco, segua $Y$, cuoca neo-mamma conosciuta a livello nazionale. Quest'ultima pubblica due tweet:
+	\begin{inparaenum}[\itshape 1\upshape)]
 		\item \#Plumcake alla \#Nutella: continuano gli esperimenti @GialloZafferano ;)
 		\item Giocare una battaglia a \#palledineve e perdere con il proprio piccolo di 3 anni <3
 	\end{inparaenum}.
-	$X$ probabilmente sarà molto interessato alla ricetta del \emph{Plumcake} ma, al contempo, non attirato dalla vita personale di $Y$.
+	Probabilmente $X$ sarà molto interessato alla ricetta del \emph{Plumcake} ma, al contempo, non attratto dalla vita personale di $Y$.
 
-	Clusterify dividerà questi due tweet in due gruppi distinti e, così, $X$ avrà la possibilità di leggere tutti i tweet riferiti ad ambiti culinari in un unico gruppo senza essere disturbato da storie di vita personale, recensioni di film e quant'altro.
+	Clusterify dividerà questi tweet in gruppi distinti ed $X$ avrà la possibilità di leggere solo quelli riferiti ad ambiti culinari senza essere disturbato da storie di vita personale, recensioni di film e quant'altro.
 
 \section{Background}
+	Clusterify nasce con lo scopo di raggruppare per argomenti i tweet presenti nel newsfeed di un qualsiasi utente. Per questo scopo è necessario attribuire ad ogni tweet gli argomenti di cui tratta raggruppandoli per quanto questi siano collegati tra di loro. 
+
+	Si è deciso di utilizzare la \emph{Twitter API} per ottenere dati da twitter e \emph{dataTXT} per estrarre gli argomenti e calcolarne le varie relazioni.
+
 	\input{twitter}
 	\input{datatxt}
 

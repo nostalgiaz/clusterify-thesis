@@ -1,30 +1,30 @@
 \subsection{dataTXT}
 % https://www.mashape.com/dandelion/datatxt-1#!documentation
-DataTXT è un insieme di API semantiche sviluppate da SpazioDati S.r.l. che mirano a estrarre significato da testi scritti in diverse lingue. Questo prodotto si diversifica dagli altri dello stesso genere in quanto è stato pensato e ottimizzato per lavorare su testi molto corti, come i tweets.
+	DataTXT è un insieme di API semantiche sviluppate da SpazioDati S.r.l.  \url{http://spaziodati.eu} che mira a estrarre significato da testi scritti in diverse lingue. Questo prodotto si diversifica dagli altri dello stesso genere in quanto è stato pensato e ottimizzato per lavorare su testi molto corti, come i tweet.
 
-DataTXT, essendo appunto una famiglia di strumenti, esegue molti compiti: può ad esempio estrarre da un testo delle \emph{entità} oppure categorizzare dei documenti in categorie stabilite dall'utente stesso.
+	DataTXT può estrarre da un testo delle \emph{entità}, può categorizzare documenti in categorie stabilite dall'utente stesso e molto altro.
 
-\subsubsection{Grafo di dataTXT}
-	DataTXT per poter eseguire i suoi algoritmi ha bisogno di basarsi su di un grafo pre-calcolato; questo ha $n+r$ nodi, dove $n$ sono gli snippet $S =  \{S_1, ..., S_n\}$ e $r$ sono i topic $T = \{t_1, ..., t_r\}$. 
+	%\subsubsection{Grafo di dataTXT}
+%		DataTXT per poter eseguire i suoi algoritmi ha bisogno di basarsi su di un grafo pre-calcolato; questo ha $n+r$ nodi, dove $n$ sono gli snippet $S =  \{S_1, ..., S_n\}$ e $r$ sono i topic $T = \{t_1, ..., t_r\}$. 
+%
+%		Dato uno snippet $s$ e un topic $t$, denotiamo come $p(s,t)$ lo score che dataTXT assegna all'annotazione di $s$ con il topic $t$. Questo valore rappresenta l'importanza che un topic $t$ ha su di uno snippet $s$ e viene utilizzato come valore per l'arco da va da $s$ a $t$ nel grafo stesso.
+%
+%	Dati due topic $t_a$ e $t_b$, per esempio due pagine di Wikipedia, si può misurare la loro \emph{relatedness} $rel(t_a, t_b)$ utilizzano la seguente funzione che si basta sul numero di citazioni e co-citazioni delle due pagine di Wikipedia:
+%	\begin{equation*}
+%	  rel(t_a, t_b) = \frac{log(| in(t_a) |) - log(| in(t_a) \cap in(t_b)|)}{log(W) - log(|in(t_b)|)}
+%	\end{equation*}
+%	dove $in(t)$ è il set di archi entranti nella pagina $t$ e $W$ è il numero totale delle pagine di Wikipedia\cite{datatxt_graph}.
 
-Dato uno snippet $s$ e un topic $t$, denotiamo come $p(s,t)$ lo score che dataTXT assegna all'annotazione di $s$ con il topic $t$. Questo valore rappresenta l'importanza che un topic $t$ ha su di uno snippet $s$ e viene utilizzato come valore per l'arco da va da $s$ a $t$ nel grafo stesso.
+	\subsubsection{dataTXT NEX}
+		DataTXT NEX (\emph{Named Entity eXtraction}) è un API che permette di localizzazione e di estratte da un testo entità quali persone, organizzazioni, luoghi, espressioni di tempo, ecc.
 
-	Dati due topic $t_a$ e $t_b$, per esempio due pagine di Wikipedia, si può misurare la loro \emph{relatedness} $rel(t_a, t_b)$ utilizzano la seguente funzione che si basta sul numero di citazioni e co-citazioni delle due pagine di Wikipedia:
-	\begin{equation*}
-	  rel(t_a, t_b) = \frac{log(| in(t_a) |) - log(| in(t_a) \cap in(t_b)|)}{log(W) - log(|in(t_b)|)}
-	\end{equation*}
-	dove $in(t)$ è il set di archi entranti nella pagina $t$ e $W$ è il numero totale delle pagine di Wikipedia\cite{datatxt_graph}.
+		Per ottenere queste informazioni basta richiedere via HTTP l'elaborazione dei dati  prefissati in input. Segue un esempio: \url{https://api.dandelion.eu/datatxt/nex/v1/?lang=en&text=The%20doctor%20says%20an%20apple%20is%20better%20than%20an%20orange&include=type,abstract,categories,lod&$app_id=YOUR_APP_ID&$app_key=YOUR_APP_KEY}
 
-\subsubsection{dataTXT NEX}
-	DataTXT NEX è un servizio che permette di fare \emph{Named Entity eXtraction} da un 	testo. 
+		Dopo l'elaborazione di una qualsiasi richiesta, una risposta viene consegnata.
 
-	\subsubsection{Named entity extraction}
-		Named entity extraction, anche conosciuto come Named entity recognition, è un processo che cerca di localizzare e, successivamente, di classificare elementi presenti in un testo in categorie predefinite, come ad esempio persone, organizzazioni, luoghi, espressioni di tempo, ecc \cite{named_enitity_extraction}.
+		Come  tutte le chiamate HTTP, anche le risposte di dataTXT sono composte da un \emph{header} e da un \emph{body}.
 
-	\subsubsection{Esempio di richiesta}
-		\url{https://api.dandelion.eu/datatxt/nex/v1/?lang=en&text=The%20doctor%20says%20an%20apple%20is%20better%20than%20an%20orange&include=type,abstract,categories,lod&$app_id=YOUR_APP_ID&$app_key=YOUR_APP_KEY}
-        \subsubsection{Esempio di risposta}
-		Nell'\emph{header} sono presenti molte informazioni utili quali il numero di crediti utilizzati, quelli rimanente e la data in cui questi torneranno al valore iniziale.
+		Nella prima sezione sono presenti molte informazioni utili quali il numero di crediti utilizzati, quelli rimanente e la data in cui questi torneranno al valore iniziale.
 		
 		\begin{lstlisting}
 Connection: keep-alive
@@ -37,7 +37,7 @@ X-DL-units-left: 999
 X-DL-units-reset: 2015-10-22 00:00:00 +0000
 		\end{lstlisting}
 
-		Nel \emph{body}, invece, sono presenti i dati veri e propri. \emph{Annotations} è la lista composta dagli elementi trovati, con vari dettagli; questi elementi sono filtrati da alcuni parametri che possono essere passati nella richiesta,  ad esempio la \emph{min\_confidence}.
+		Nella seconda, invece, sono presenti i dati veri e propri. \emph{Annotations} è la lista composta dagli elementi trovati, con vari dettagli; questi elementi sono filtrati da alcuni parametri che possono essere passati nella richiesta,  ad esempio la \emph{min\_confidence}.
 
 		\begin{lstlisting}
 {
@@ -77,12 +77,43 @@ X-DL-units-reset: 2015-10-22 00:00:00 +0000
 }
 		\end{lstlisting}
 
-\subsubsection{dataTXT REL}
-	DataTXT REL  è un servizio che, ad oggi, non è ancora presente sul mercato, ma che permetterà di capire quando un topic $t_a$ è correlato ad un topic $t_b$, ricavando questo valore dalla formula utilizzata per la creazione degli archi pesati all'interno del grafo di dataTXT.
+	\subsubsection{dataTXT REL}
+		DataTXT REL  è un servizio che, ad oggi, non è ancora presente sul mercato, ma che permetterà di capire quando un topic $t_a$ è correlato ad un topic $t_b$, ricavando questo valore dalla seguente formula:
+		\begin{equation*}
+			rel(t_a, t_b) = \frac{log(| in(t_a) |) - log(| in(t_a) \cap in(t_b)|)}{log(W) - log(|in(t_b)|)}
+		\end{equation*}
 
-\subsubsection{dataTXT *}
-	DataTXT è un progetto vivo ed in continua evoluzione, con l'uscita periodica di nuove funzionalità; su \url{https://dandelion.eu/products/datatxt/} si possono ottenere informazioni circa le novità.
+		Come dataTXT-NEX, anche dataTXT-REL sarà interrogabile nello stesso modo: \url{https://api.dandelion.eu/datatxt/rel/v1/?topic1=Roma&topic2=Trento&lang=it&$app_id=YOUR_APP_ID&$app_key=YOUR_APP_KEY}.
 
+		L'\emph{header} della risposta sarà uguale a quello di dataTXT-NEX, mentre il \emph{body} sarà strutturato come segue:
 
+		\begin{lstlisting}
+{
+  "time": 2,
+  "relatedness": [{
+    "weight": 0.7127059,
+      "topic1": {
+        "input": "Roma",
+        "topic": {
+          "id": 1209297,
+          'title": "Roma",
+          "uri": "http://it.wikipedia.org/wiki/Roma",
+          "labe"l: "Roma"
+        }
+      },
+      "topic2": {
+        "input": "Trento",
+        "topic": {
+          "id": 100137,
+          "title": "Trento",
+          "uri": "http://it.wikipedia.org/wiki/Trento",
+          "label": "Trento"
+        }
+      }
+  }],
+  "lang": "it",
+  "timestamp": "2014-05-14T21:41:58.171"
+}
+		\end{lstlisting}
 
 

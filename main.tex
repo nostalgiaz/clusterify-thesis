@@ -1,4 +1,5 @@
 \documentclass[a4paper,11pt]{report}
+\usepackage[italian]{babel}
 
 \usepackage{graphicx}
 \usepackage{cmap}
@@ -9,7 +10,6 @@
 \usepackage{url}
 \usepackage{listings}
 
-\usepackage[english]{babel}
 \usepackage{amsmath}
 \usepackage{amsfonts}
 \usepackage{epigraph}
@@ -29,12 +29,7 @@
   \chapter*{#1}%
   \addcontentsline{toc}{chapter}{\protect\numberline{}#1}}
 
-\addto\captionsenglish{
-  \renewcommand{\contentsname}{Contenuti}
-  \renewcommand{\bibname}{Bibliografia}
-} 
-  
-\title{Clusterify: clustering non supervisionato di tweets}
+\title{Clusterify: clustering non supervisionato di tweet}
 \author{Mattia Larentis}
 
 \begin{document}
@@ -44,8 +39,8 @@
   	\input{prefazione}  
   	\input{clustering}
   	\input{clusterify}
-  	\input{conclusione}
-  	\input{ringraziamenti}
+%  	\input{conclusione}
+%  	\input{ringraziamenti}
   	\bibliographystyle{unsrt}
   	\bibliography{biblio}
 \end{document}

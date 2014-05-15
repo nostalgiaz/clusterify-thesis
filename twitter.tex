@@ -1,28 +1,27 @@
 \subsection{Twitter API}
-	Twitter Inc. è un social network che permette agli utenti di scrivere e di leggere \emph{micropost}, messaggi lunghi al più 140 caratteri, comunemente chiamati \emph{tweets}. 
+	Twitter Inc. è un social network che permette ai propri utenti di scrivere e di leggere \emph{micropost}, messaggi lunghi al più 140 caratteri, comunemente chiamati \emph{tweet}. 
 
-	Questa piattaforma, creata nel 2006 da Jack Dorsey, Evan Williams, Biz Stone e Noah Glass, ha spopolato fino a raggiungere nel 2013 più di 200 milioni di utenti attivi e più di 400 milioni di tweets al giorno\cite{twitter_data}.
+	Questa piattaforma, creata nel 2006 da Jack Dorsey, Evan Williams, Biz Stone e Noah Glass, ha spopolato fino a raggiungere nel 2013 più di 200 milioni di utenti attivi e più di 400 milioni di visite al giorno\cite{twitter_data}.
 
-	Ad oggi, Twitter, è l'undicesimo sito internet visitato ogni giorno\cite{twitter_alexa}.
+	Ad oggi, Twitter è l'undicesimo sito internet visitato quotidianamente, secondo nei social network, preceduto solamente da Facebook\cite{twitter_alexa}.
 
-	Twitter possiede, come la maggior parte dei social network, un servizio interrogabile via API per ottenere e per caricare dati.
+	Twitter possiede, come la maggior parte dei social network, un servizio interrogabile via API per ottenere e per caricare dati: nel primo caso si possono richiedere i tweet che compongono il \emph{newsfeed} di un dato utente, i messaggi privati che due utenti si scambiano ed ancora alcuni dati relativi al profilo, come nome e cognome, nickname, immagine utente e così via; nel secondo caso, invece, si può pubblicare un tweet come se l'utente lo facesse dall'interfaccia web oppure modificare dati che Twitter ha salvato nel proprio database. 
 
-	Nel primo caso si possono richiedere i tweets che compongono la \emph{timeline} di un utente, i messaggi privati che due utenti si scambiano oppure alcuni dati relativi all'account di un utente come nome e cognome, nickname, immagine profilo e via dicendo.
-
-	Nel secondo caso, invece, si può scrivere un nuovo tweet oppure modificare dati che Twitter ha salvato nel propri databases. 
-
-	In entrambi i casi serve che l'utente interessato \emph{firmi} un consenso che permette al programmatore di interagire con i propri dati; una volta permesso, sarà possibile agire come l'utente stesso. 
+	In entrambi i casi serve che l'utente interessato ``firmi'' un consenso che permetterà al programmatore di interagire con questi dati. 
 
 	\subsubsection{REST API v1.1}
-	% https://dev.twitter.com/docs/api/1.1
-		Il modo per interagire con i dati di Twitter è appunto la REST API. 
+		% https://dev.twitter.com/docs/api/1.1
+		Il modo che Twitter offre per interagire con i propri dati è la REST API. 
 	
 		Con REST (Representational State Transfer) si indica un tipo di architettura software basato sull'idea di utilizzare la comunicazione tra macchine per mezzo di richieste HTTP.
 
 		Le applicazioni basate su questo tipo di architettura vengono nominate RESTful ed utilizzano, appunto, HTTP per tutte le operazioni di \emph{CRUD}: Create, Read, Update e Remove.
 
-		Twitter mette a disposizione, nella documentazione per i programmatori\cite{twitter_doc}, una lunga lista di possibili richieste -- \url{https://dev.twitter.com/docs/api/1.1} -- e per ognuna di queste, una pagina dedicata dove, dopo una breve descrizione, vengono elencati i dati richiesti in input, i possibili filtri applicabili, la struttura dell'output che questa richiesta genererà ed, infine, un esempio richiesta/risposta per chiarire le idee.
+		Twitter mette a disposizione, nella documentazione per i programmatori\cite{twitter_doc}, una lunga lista di possibili richieste -- \url{https://dev.twitter.com/docs/api/1.1} -- e per ognuna di queste una pagina dedicata dove vengono elencati i dati richiesti in input, i possibili filtri applicabili, la struttura dell'output che questa richiesta genererà ed infine un esempio richiesta/risposta per chiarire le idee.
 
-	\subsubsection{Autenticazione e autorizzazione: OAuth}
-	% https://dev.twitter.com/docs/auth
-		OAuth, il protocollo di autenticazione che utilizza Twitter\cite{twitter_auth}, permette agli utenti di approvare un'applicazione che agisca al loro posto, senza il bisogno di condividere password. Gli sviluppatori possono così pubblicare e interagire con dati protetti, come ad esempio i tweets; i service provider, al contempo, proteggono le credenziali dei loro utenti\cite{twitter_aut_faq}.
+		% https://dev.twitter.com/docs/auth
+		OAuth, il protocollo di autenticazione che Twitter utilizza\cite{twitter_auth}, permette agli utenti di approvare che un'applicazione agisca al loro posto, senza il bisogno di condividere i dati sensibili, quali username e password. OAuth scambia dei token per evitare il passaggio di questa tipologia di dati.
+
+		Gli sviluppatori possono così pubblicare e interagire con dati protetti, come ad esempio i service provider e al contempo proteggono le credenziali dei loro utenti\cite{twitter_auth_faq}.
+
+% PARLARE DI UNA POSSIBILE RICHIESTA!
