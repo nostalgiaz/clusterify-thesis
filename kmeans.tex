@@ -1,29 +1,43 @@
-K-means è il nome di un algoritmo di clustering che punta a creare $k$ gruppi distinti di uguale varianza, minimizzando l'inerzia del gruppo. Questo algoritmo richiede che il numero di cluster sia definito a priori.
+K-means punta a creare $K$ gruppi distinti di uguale varianza, minimizzando l'inerzia del gruppo. Questo algoritmo richiede che il numero di cluster sia definito a priori.
 
-L'algoritmo punta a scegliere $k$ centroidi $C$ che minimizzano lo scarto quadratico medio con un dataset $X$ di $n$ elementi $(x_1,..., x_n)$, creando $k$ insiemi $S = {S_1, ..., S_K}$:
+%L'algoritmo punta a scegliere $K$ centroidi $C$ che minimizzano lo scarto quadratico medio con un dataset $X$ di $n$ elementi $(x_1,..., x_n)$, creando $K$ insiemi $S = {S_1, ..., S_K}$:
+%
+%\begin{equation*}
+%	\underset {\mathbf{S}} {\operatorname{arg\,min}}  \sum_{i=1}^{k} \sum_{\mathbf x_j \in S_i} || x_j - \mu_i ||^2 
+%\end{equation*}
+
+L'algoritmo si può riassumere in questi punti:
+\begin{algorithm}
+	\begin{algorithmic}[1]
+  		\caption{K-means}
+		\State Seleziona K punti come centroidi.
+		\Repeat			\State Forma K cluster assegnando ogni elemento al centroide più vicino.			\State Ricalcola i centroidi per ogni cluster.
+		\Until{I centroidi non cambiano posizione (con possibile errore $\sim$ 1\%).}
+  	\end{algorithmic}
+\end{algorithm}
+
+Solitamente, la scelta iniziale della posizione dei $K$ centroidi viene presa in modo casuale. In alcuni casi è conveniente utilizzare altre tecniche: ad esempio, se il numero di elementi si aggira attorno ad alcune centinaia di punti e se $K$ è relativamente piccolo rispetto alla dimensione del cluster, si può utilizzare il clustering gerarchico fino a definire $K$ cluster ed utilizzare i centroidi di questi cluster come i centroidi dell'intero sistema.
+
+Tuttavia, per assegnare ogni elemento ad un centroide si ha bisogno di una misura in grado di quantificare il concetto di ``vicinanza''. Considerando che esistono diverse tipologie di dato che ipoteticamente si potrebbero clusterizzare, si ha bisogno di diverse funzioni per calcolare queste vicinanze: la distanza euclidea, conosciuta come $L2$, è solitamente utilizzata per dati rappresentabili su spazio euclideo; per la distanza tra documenti, invece, ha più senso utilizzare il $coseno\ di\ similitudine$.
+
+Nel caso di dati rappresentabili su spazio euclideo misuriamo la qualità di un cluster utilizzando \emph{SSE}, ovvero lo scarto quadratico medio. Il compito dell'algoritmo è di minimizzare quest'errore. Possiamo definire SSE come segue:
 
 \begin{equation*}
-	\underset {\mathbf{S}} {\operatorname{arg\,min}}  \sum_{i=1}^{k} \sum_{\mathbf x_j \in S_i} || x_j - \mu_i ||^2 
+	SSE = \sum_{i=1}^{K}{\sum_{x \in C_i} {dist(c_i, x)^2}}
 \end{equation*}
+dove \emph{dist} è la distanza euclidea, $C_i$ è l'$i$-esimo cluster e $c_i$ è l'$i$-esimo centroide.
 
-L'algoritmo in se è composto da tre passi:
-\begin{enumerate}
-	\item Scelta dei centroidi iniziali;
-	\item Assegnamento di ogni componente;
-	\item Creazione di nuovi centroidi;
-\end{enumerate}
-
-Dopo aver scelto i primi $k$ centroidi dalle componenti del dataset $X$, l'algoritmo continua ad eseguire due operazioni finché i centroidi proposti possono essere considerati corretti, ovvero che la propria posizione non venga modificata con il passare delle iterazioni\cite{kmeans_description}. 
-
-L'assegnamento di ogni componente ad un centroide si esegue utilizzando la distanza euclidea al quadrato, questa sarà assegnata al punto medio più vicino; si può calcolare la distribuzione delle componenti in questo modo:
+Si può dimostrare che il centroide che minimizza lo scarto quadratico medio del cluster è ottimale. Il centroide dell'$i$-esimo cluster è definito come segue:
 \begin{equation*}
-	S_i^{(t)} = \big \{ x_p : || x_p - m^{(t)}_i ||^2 \le || x_p - m^{(t)}_j ||^2 \ \forall j, 1 \le j \le k \big\}
+	c_i = \frac{1}{m_i} \sum_{x \in C_i}{x}
 \end{equation*}
-dove ogni $x_p$ è assegnato a esattamente un $S^{(t)}$, anche se idealmente potrebbe essere assegnato a più di un centroide.
+dove $m_i$ è il numero di oggetti nell'$i$-esimo cluster.
 
-La creazione dei nuovi centroidi utilizza, invece, il valore medio di ogni componente appartenente ad ogni centroide precedentemente definito.
+Nel caso di documenti, invece, si deve massimizzare la similarità tra i documenti presenti in un cluster; questo valore viene detto \emph{coesione} del cluster, l'analogo dello scarto quadratico medio, e viene calcolato come segue:
+
 \begin{equation*}
-	m^{(t+1)}_i = \frac{1}{|S^{(t)}_i|} \sum_{x_j \in S^{(t)}_i} x_j 
+	Total\ Cohesion = \sum_{i=1}^{K}{\sum_{x \in C_i} {cosine(x, c_i)}}
 \end{equation*}
+dove \emph{cosine} è il $coseno\ di\ similitudine$.
 
-Per quanto riguarda la scelta dei centroidi ci si può basare sul caso, scegliendo in modo \emph{random} i punti, con l'idea che con il passare delle iterazioni queste stime si sistemeranno; la seconda scelta vede il posizionamento dei centroidi in modo equidistante dagli tra loro, col fine di cercare di massimizzare l'area coperta e minimizzare il numero di iterazioni necessarie per giungere nella situazione finale di stallo\cite{kmeans_algorithm}.
+In ogni caso l'algoritmo termina quando i centroidi assumono uno stato di fermo\cite{k-means}. 
