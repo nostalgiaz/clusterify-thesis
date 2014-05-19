@@ -1,10 +1,4 @@
-K-means punta a creare $K$ gruppi distinti di uguale varianza, minimizzando l'inerzia del gruppo. Questo algoritmo richiede che il numero di cluster sia definito a priori.
-
-%L'algoritmo punta a scegliere $K$ centroidi $C$ che minimizzano lo scarto quadratico medio con un dataset $X$ di $n$ elementi $(x_1,..., x_n)$, creando $K$ insiemi $S = {S_1, ..., S_K}$:
-%
-%\begin{equation*}
-%	\underset {\mathbf{S}} {\operatorname{arg\,min}}  \sum_{i=1}^{k} \sum_{\mathbf x_j \in S_i} || x_j - \mu_i ||^2 
-%\end{equation*}
+K-means punta a creare $K$ gruppi distinti di uguale varianza, con $K$, ovvero il numero di cluster richiesti, definito a priori.
 
 L'algoritmo si può riassumere in questi punti:
 \begin{algorithm}

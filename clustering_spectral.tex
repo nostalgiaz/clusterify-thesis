@@ -1,11 +1,9 @@
 \section{Clustering spectral}
-	Questa tipologia nasce dal bisogno di eliminare delle mancanze presenti negli altri metodi. 
+	Questa tipologia di clustering nasce dal bisogno di eliminare delle mancanze presenti negli altri metodi: i metodi partizionali riescono a creare cluster solamente di forma sferica, basandosi, come abbiamo già visto, sul concetto di centro; al contrario i metodi density-based hanno un approccio troppo sensibile ai parametri dati.
 
-	I metodi partizionali riescono a creare cluster solamente di forma sferica, basandosi, come abbiamo già visto, sul concetto di centro; al contrario i metodi density-based hanno un approccio troppo sensibile ai parametri dati.
+	Per risolvere questi problemi si utilizza un grafo di similarità che ha come vertici le componenti da clusterizzare e, come valore degli archi, la similarità delle componenti tra cui questi sono sottesi.
 
-	Per risolvere questi problemi si utilizza un grafo di similarità che ha come vertici le componenti da clusterizzare e, come valore degli archi, la similarità delle componenti tra cui questo è sotteso.
-
-	Una volta creato il grafo, si procede con una serie di tagli minimi che possono essere trovati in questo modo:
+	Una volta creato il grafo, si procede con una serie di tagli minimi che possono essere trovati con un "taglio normalizzato" secondo la seguente formula:
 
 	\begin{equation*}
 		NormCut(C_1, C_2) =  \frac{Cut(C_1, C_2)}{Vol(C_1)} + \frac{Cut(C_1, C_2)}{Vol(C_2)}
@@ -19,5 +17,6 @@
 	\begin{equation*}
 		Vol(C) = \sum_{i \in C, j \in V} {w_{ij}}
 	\end{equation*}
+	dove $Cut(C_1, C_2)$ calcola il peso totale delle connessioni tra $C_1$ e $C_2$ e $Vol(C)$ calcola il peso totale degli archi originati dal cluster $C$.
 
-	Uno degli algoritmi più famosi appartenente a questa categoria è senz'altro Spectral.
+	Uno degli algoritmi più famosi appartenente a questa categoria è Spectral\cite{spectral}.

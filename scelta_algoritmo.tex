@@ -1,5 +1,14 @@
-%\input{grafico}
-\catcode`\_=12 % category other
+Una volta definiti i quattro algoritmi è necessario capire quale performa meglio nel clusterizzare argomenti secondo la relatedness offerta da dataTXT.
+
+È stato chiesto a dieci persone di creare dei cluster partendo dalle entità estratte dagli ultimi 50 tweet che popolavano il loro newsfeed e il loro prodotto è stato paragonato con l'output di tutti gli algoritmi proposti. 
+
+Per questo compito è stata utilizzata la funzione ``adjusted\_rand\_score'' offerta da scikit-learn -- \url{http://scikit-learn.org/stable/modules/generated/sklearn.metrics.adjusted_rand_score.html} -- che permette di calcolare la similarità tra i cluster proposti e quello risultante. Per fare questo si considerano tutte le coppie di elementi e si contano quelle che sono state assegnate allo stesso o ad un altro cluster.
+
+Per permettere agli intervistati di formare questi cluster è stato creato un apposito file su google drive -- \url{https://docs.google.com/spreadsheets/d/1RNte6_I-cO5A23dKoaAyIRX5iWOGAEN3S25VIpXQLWU/edit?usp=sharing} -- con gli argomenti da clusterizzare pre-caricati ed è stato chiesto loro di segnare con lo stesso numero quelli che secondo loro avrebbero dovuto appartenere allo stesso cluster. 
+
+Lanciando \texttt{python manage.py analyze} dalla \emph{root} di Clusterify questi dati vengono analizzati. I risultati sono riportati nel grafico:
+
+\catcode`\_=12
 \begin{tikzpicture}
 	\begin{axis} [
    	 	ybar,
@@ -7,8 +16,8 @@
 	        	height=8cm,
         		ymin=0,
 	  	ymax=150,  
-		bar width=5pt,
-        		legend columns=3,
+		bar width=3pt,
+        		legend columns=2,
     		legend style={draw=none,nodes={inner sep=3pt}},,
     		ylabel={\% successo},
     		symbolic x coords={
@@ -34,7 +43,7 @@
 			anchor=west,
                 		rotate=90
         		},
-		x tick label style={rotate=45,anchor=east},
+		x tick label style={rotate=45, anchor=east},
     	]
 		\addplot coordinates {
 			(MartinBrugrara, 89.61) 
@@ -72,10 +81,25 @@
 			(SpiritualGuru, 62.50)
 			(carlotta_93, 71.69)
 		};
-		\legend{Affinity Propagation, Specral, Hierarchical}
+		\addplot coordinates {
+			(MartinBrugrara, 66.82) 
+			(AndreaDellera, 63.63) 
+			(gi4n1uc4, 64.32)
+			(apheniti, 64.44)
+			(john_frigo, 63.59)
+			(edorigatti, 62.81)
+			(cosaunlama, 67.00)
+			(michelaelle,  64.33)
+			(SpiritualGuru, 62.78)
+			(carlotta_93, 72.88)
+		};
+		\legend{Affinity Propagation, Specral, K-means, Hierarchical}
 	\end{axis}
 \end{tikzpicture}
-\catcode`\_=8 % category subscript
+\catcode`\_=8
 
-Affinity Propagation!
+Come si può dedurre dal grafico, ogni persona che ha creato il proprio cluster ideale si è avvicinata inconsciamente alla soluzione proposta dall'\emph{Affinity Propagation}. 
 
+Una volta raccolti i dati è stato mostrato al campione intervistato il risultato proposto su di un nuovo dataset, generato sempre dall'account Twitter dei diretti interessati, ed il risultato nel 90\% dei casi, era sensato ed utilizzabile.
+
+Alla luce di questi risultati, Clusterify utilizzerà Affinity Propagation.

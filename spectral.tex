@@ -1,8 +1,8 @@
 Spectral è il nome di un algoritmo di clustering che punta ad utilizzare gli autovalori della matrice delle adiacenze per capire come partizionare gli elementi dell'insieme.
 
-Dato un grafo, rappresentato appunto dalla matrice delle adiacenze, l'algoritmo cerca il taglio minimo all'interno del grafo ed elimina gli archi che passano dal primo insieme al secondo. Questo procedimento continua in modo iterativo finche non si raggiungono, come nel caso del k-means $k$ cluster.s
+Dato un grafo, rappresentato dalla matrice delle adiacenze, l'algoritmo cerca il taglio minimo all'interno del grafo ed elimina gli archi che passano dal primo insieme al secondo. Questo procedimento continua in modo iterativo finche non si raggiungono, come nel caso del K-means, $K$ cluster.
 
-Lo spectral basa il suo funzionamento sulla matrice $A$ della adiacenze, simmetrica per definizione, con $A_{ij}\geq 0$ rappresentante la similarità tra l'elemento in indice $i$ e quello in indice $j$; questa matrice, conosciuta con il nome di matrice normalizzata di Laplace, viene definita in questo modo:
+Lo spectral basa il suo funzionamento sulla matrice $A$ della adiacenze, simmetrica per definizione, con $A_{ij}\geq 0$ rappresentante la similarità tra l'elemento in indice $i$ e quello in indice $j$; questa matrice, conosciuta con il nome di matrice normalizzata di Laplace, viene così definita:
 
 \begin{equation*}
 	L^{norm} = I-D^{-1/2} A D^{-1/2},
@@ -12,4 +12,4 @@ dove $D$ è la matrice diagonale costruita in questo modo:
 	D_{ii} = \sum_j A_{ij}.
 \end{equation*}
 
-L'algoritmo partiziona gli elementi in due insiemi distinti ($B_1$, $B_2$) basando la scelta del taglio sui valori dell'autovettore $v$ relativo al secondo più piccolo autovalore calcolato su $L^{norm}$ \cite{spectral_algorithm}.
+L'algoritmo partiziona gli elementi in due insiemi distinti $(B_1, B_2)$ basando la scelta del taglio sui valori dell'autovettore $v$ relativo al secondo più piccolo autovalore calcolato su $L^{norm}$ \cite{spectral_algorithm}.

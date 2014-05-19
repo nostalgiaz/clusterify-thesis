@@ -30,9 +30,9 @@
 	L'ultima componente estendibile sono gli algoritmi di clustering.
 
 	\subsection{Algoritmi di clustering}
-		Un algoritmo di clustering permette di raggruppare oggetti all'interno di insiemi, mantenendo uniti gli elementi che secondo alcune regole risultano più coesi, dividendo quelli meno simili.
+		Un algoritmo di clustering permette di raggruppare oggetti all'interno di insiemi, mantenendo uniti gli elementi che secondo alcune regole risultano più coesi e dividendo quelli meno simili.
 
-		Non esistendo un algoritmo ottimo per ogni caso pensabile, Clusterify ne comprende \emph{quattro} nel core. Questi sono utili sia rilasciare un sistema in grado di coprire la maggior parte dei casi d'uso, sia per valutare quale performa meglio con l'input in questione.
+		Poiché non esiste un algoritmo ottimo per ogni caso pensabile, Clusterify ne comprende \emph{quattro} nel core. Questi sono utili sia a rilasciare un sistema in grado di coprire la maggior parte dei casi d'uso, sia per valutare qual'è la performance migliore con l'input in questione.
 
 		I quattro algoritmi presenti in Clusterify sono presi da scikit-learn -- \url{http://scikit-learn.org/}. Questa decisione è stata presa sia per offrire più di un algoritmo alla community, sia per valutare se la mia ipotesi iniziale circa il miglior algoritmo fosse corretta. 
 
@@ -57,7 +57,9 @@
 \section{Workflow}
 	Clusterify non è altro che un sistema di \emph{pipe}, dove un comando viene eseguito prendendo come input l'output del precedente.
 
-	Come si è visto nel sezione relativa al \emph{processo di caricamento} nel capitolo \emph{frontend}, il workflow si può suddividere in tre parti:
+	Per permettere che un elaborazione non ne blocchi un'altra, si è deciso di utilizzare celery -- \url{http://www.celeryproject.org/} --, un sistema di code per la gestione di \emph{task}. Così facendo, quando un utente richiede un'elaborazione, la si mette in coda e si informa l'utente che questa partirà appena possibile. Una volta terminata, l'utente riceverà una mail con la notifica di fine workflow.
+
+	Il workflow si può suddividere in tre parti:
 
 	\begin{enumerate}
   		\item Acquisizione dei testi
@@ -66,30 +68,29 @@
 	\end{enumerate} 
 	
 	\subsection{Acquisizione dei testi}
-		La parte di acquisizione testi, come detto in \emph{reader} è una delle due parti pluggabili di Clusterify.
+		La componente di acquisizione testi, come detto precedentemente, è una delle parti pluggabili di Clusterify.
 
-		Questa fase si occupa del prendere i dati da una qualsivoglia fonte e di salvarli in modo conferme allo standard creato. All'interno di questa parte è possibile implementare, se necessario, un livello di cache in modo da impedire di richiedere più volte le stesse informazioni.
+		Questa fase si occupa del prendere i dati da una qualsivoglia fonte e di salvarli in modo conforme allo standard imposto. All'interno di questa componente è possibile implementare, se necessario, un livello di cache in modo da impedire di richiedere più volte le stesse informazioni.
 
-		In Clusterify, \emph{TwitterReader} utilizza \emph{Twython}, una libreria Python che offre un accesso facile ai dati presenti su Twitter\cite{twython}. In altre parole, Twython offre un \emph{wrapper} alle API di Twitter, permettendo al programmatore di ottenere dati senza preoccuparsi della gestione errori, dell'aggiornamento delle API e quant'altro. 
+		In Clusterify, \emph{TwitterReader} utilizza \emph{Twython}  -- \url{https://github.com/ryanmcgrath/twython} --, una libreria Python che offre un accesso facile ai dati presenti su Twitter. In altre parole, Twython offre un \emph{wrapper} alle API di Twitter, permettendo al programmatore di ottenere dati senza preoccuparsi della gestione errori, dell'aggiornamento delle API e quant'altro. 
 
 	\subsection{Annotazioni dei testi}
 		La seconda fase del workflow si occupa di annotare i testi per mezzo di dataTXT.
 		
-		Quest'operazione è fondamentale per un buon risultato finale in quanto questa può far incorrere nel riconoscimento di entità sbagliate; oppure, nel caso contrario, ci si può imbattere nell'estrazione di poche entità, ma molto precise. Avere troppe annotazioni sbagliate possono condurre nell'avere dei dati non veritieri; il contrario potrebbe portare a non avere nemmeno un entità estratta per testo analizzato e quindi, in fase di clustering, questi verrebbero persi.
+		Quest'operazione è fondamentale per un buon risultato finale in quanto si può  incorrere nel riconoscimento di entità sbagliate; oppure, nel caso contrario, ci si può imbattere nell'estrazione di poche entità ma molto precise. Avere troppe annotazioni sbagliate può condurre all'avere dei dati non veritieri; il contrario potrebbe portare a non avere nemmeno un'entità estratta per testo analizzato e quindi, in fase di clustering, i testi analizzati da cui non si estraggono entità, verrebbero persi.
 
-		Al programmatore è quindi chiesto di scegliere molto attentamente i parametri che verranno passati all'estrattore, per non finire in uno dei due casi.
+		Al programmatore è quindi chiesto di scegliere molto attentamente i parametri che verranno passati all'estrattore, per non finire in nessuno dei due casi.
 
 	\subsection{Clustering dei testi}
-		L'ultima fase la si può pensare suddivisa a sua volta in tre sotto fasi:
+		L'ultima fase la si può pensare suddivisa a sua volta in due sotto fasi:
 
 		\begin{enumerate}
   			\item Creazione matrice delle adiacenze
   			\item Esecuzione dell'algoritmo di clustering
- 			\item Uniformazione output
 		\end{enumerate} 
 
 		\subsubsection{Creazione matrice di adiacenza}
-			La maggior parte degli algoritmi di clustering necessita di un grafo pesato su cui operare. Questo è rappresentato per mezzo di una matrice delle adiacenze $N \times N$, ove $N$ è la cardinalità dell'insieme composto da tutte le entità, e viene costruita in questo modo:
+			La maggior parte degli algoritmi di clustering necessita di un grafo pesato su cui operare. Questo è rappresentato per mezzo di una matrice delle adiacenze $N \times N$, dove $N$ è la cardinalità dell'insieme composto da tutte le entità, e viene costruita in questo modo:
 
 			\begin{equation*}
 				Adj(a, b) = \begin{cases} 
@@ -97,21 +98,20 @@
 					0, & altrimenti 
 				\end{cases}
 			\end{equation*}
-			ove $Adj$ è la nostra matrice delle adiacenze, $a$ e $b$ sono i due topic e $rel(a,b)$ è la chiamata all'API dataTXT-REL che permette di capire quanto due entità sono correlate tra di loro.
+			ove $Adj$ è la nostra matrice delle adiacenze, $a$ e $b$ sono i due topic e $rel(a,b)$ è la chiamata all'API dataTXT-REL che permette di capire quanto due entità siano correlate tra loro.
 			
 			Si deduce che $Adj$ è una matrice speculare, con valori reali compresi tra $0$ e $1$, e che presenta $0$ sulla diagonale.
 
 		\subsubsection{Esecuzione dell'algoritmo di clustering}
-			Una volta generata la matrice delle adiacenze si può eseguire un algoritmo di clustering. Come già detto Clusterify permette di estendere gli algoritmi già presenti, quali \emph{Star}, \emph{Spectral}, \emph{Affinity Propagation}. Una volta stabilito l'algoritmo da utilizzare, Cluterify passerà a questo i vari dati e aspetterà l'esecuzione e il successivo output.
-
-		\subsubsection{Uniformazione output}
-			Dato l'output dell'algoritmo di clustering, i dati saranno processati nuovamente attraverso una funzione votata a due principali funzioni:
+			Una volta generata la matrice delle adiacenze si può eseguire l'algoritmo di clustering precedentemente scelto. Dato l'output, i dati saranno processati nuovamente attraverso una funzione votata a due principali funzioni:
 			\begin{itemize}
   				\item Rendere l'output conforme con il modello prestabilito
 	  			\item Aggiungere informazioni ad ogni componente del cluster
  			\end{itemize} 
 			
-			La prima si occuperà di portare la struttura dati uscente dall'algoritmo in quella stabilita da Clusterify; la seconda, invece, permette di aumentare l'informazione che questa contiene, aiutandosi con dati calcolati in precedenza o sul posto.
+			La prima si occuperà di trasformare la struttura dei dati generata dall'algoritmo in quella stabilita da Clusterify; la seconda, invece, si occuperà di aumentare l'informazione che questa contiene.
+
+			Ad esempio in Clusterify la seconda funzione aggiunge un dato che indica quanto una componente deve essere grande, calcolando questo dato sul numero di occorrenze che la stessa entità ha nel dataset.
 
 \section{Frontend}
-	Frontend
+	\input{frontend}

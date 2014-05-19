@@ -1,1 +1,23 @@
-ward
+Il metodo Ward si basa sul clustering gerarchico di tipo agglomerativo. Ad ogni passo dell'esecuzione si unisce la coppia di cluster che possiede la distanza minima. 
+
+Questo metodo viene implementato dall'algoritmo Lance–Williams. Questo utilizza un approccio ricorsivo per aggiornare ad ogni passo la distanza tra i cluster, unendo i due gruppi più vicini.
+
+Poiché non esiste un unico algoritmo basato su Ward, si può definire una famiglia di algoritmi, basati sullo stesso metodo, per calcolare la distanza tra due cluster. Sia
+\begin{equation*}
+	d_{(ij)k} = \alpha_i d_{ik} + \alpha_j d_{jk} + \beta d_{ij} +  \gamma |d_{ik} - d_{jk}|,  
+\end{equation*}
+la funzione generica che permette di calcolare questa distanza tra due cluster. Sia $d_{ij}$ la distanza tra l'$i$-esimo e il $j$-esimo cluster; $d_{(ij)k}$ la distanza tra $C_i \cup C_j$ e $C_k$; e siano $\alpha_i$, $\alpha_j$, $\beta$ e $\gamma$ i parametri caratterizzanti gli algoritmi che compongono questa famiglia.
+
+Ad esempio l'algoritmo che viene utilizzato da Clusterify definisce
+\begin{equation*}
+	\alpha_i = \alpha_j  = \frac{n_l+n_k}{n_i+n_j+n_k}
+\end{equation*}
+
+\begin{equation*}
+	\beta =\frac{-n_k}{n_i+n_j+n_k}
+\end{equation*}
+
+\begin{equation*}
+	\gamma = 0
+\end{equation*}
+ed è conosciuto con il nome di \emph{Ward's minimum variance method}\cite{ward}.
