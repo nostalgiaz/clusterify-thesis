@@ -21,16 +21,16 @@
 \section{Backend}
 	Clusterify è un'applicazione Django -- \url{https://www.djangoproject.com/} -- pensata e creata basandosi sulla necessità di essere estesa e modellata secondo le preferenze degli sviluppatori. %inserire nuovi \emph{reader} e nuovi algoritmi di clustering. 
 
-	Si può vedere il tutto come una struttura a mattoncini dove si possono scambiare dei blocchi per raggiungere il risultato atteso, senza necessariamente modificare il codice del \emph{core}. Questi blocchi sono i \emph{reader}, i \emph{livelli d cache} e gli \emph{algoritmi di cluster}.
+	Si può vedere il tutto come una struttura a mattoncini dove si possono scambiare dei blocchi per raggiungere il risultato atteso, senza necessariamente modificare il codice del \emph{core}. Questi blocchi sono i \emph{reader}, i \emph{livelli di cache} e gli \emph{algoritmi di cluster}.
 	
-	Permettere di ottenere testi da più fonti significa creare altrettanti mezzi per interfacciare Clusterify a queste sorgenti, creando una \emph{black-box} che trasforma i testi in input in un dato strutturato precedentemente definito. Clusterify nasce con TwitterReader che, come da nome, permette di leggere i dati direttamente dalle API di Twitter. Per creare un nuovo reader, quindi, basta soddisfare queste due regole.
+	Permettere di ottenere testi da più fonti significa creare altrettanti mezzi per interfacciare Clusterify a queste sorgenti, creando una \emph{black-box} che trasforma i testi in un dato strutturato precedentemente definito. Clusterify nasce con \emph{TwitterReader} che, come da nome, permette di leggere i dati direttamente dalle API di Twitter. Per creare un nuovo reader, quindi, basta soddisfare trasformare l'input secondo la struttura imposta.
 
 	La cache, invece, è una componente strutturale che viene utilizzata da tutto il progetto per evitare il replicarsi di richieste HTTP già fatte. Clusterify nasce con Redis -- \url{http://redis.io/} -- integrato, permettendo comunque di cambiare questa componente se lo sviluppatore lo desidera.
 
 	L'ultima componente estendibile sono gli algoritmi di clustering.
 
 	\subsection{Algoritmi di clustering}
-		Un algoritmo di clustering permette di raggruppare oggetti all'interno di insiemi, mantenendo uniti gli elementi che secondo alcune regole risultano più coesi e dividendo quelli meno simili.
+		Un algoritmo di clustering permette di raggruppare oggetti all'interno di insiemi, mantenendo uniti gli elementi che secondo alcune regole risultano più coesi e dividendo quelli che lo sono meno.
 
 		Poiché non esiste un algoritmo ottimo per ogni caso pensabile, Clusterify ne comprende \emph{quattro} nel core. Questi sono utili sia a rilasciare un sistema in grado di coprire la maggior parte dei casi d'uso, sia per valutare qual'è la performance migliore con l'input in questione.
 
@@ -103,9 +103,9 @@
 			Si deduce che $Adj$ è una matrice speculare, con valori reali compresi tra $0$ e $1$, e che presenta $0$ sulla diagonale.
 
 		\subsubsection{Esecuzione dell'algoritmo di clustering}
-			Una volta generata la matrice delle adiacenze si può eseguire l'algoritmo di clustering precedentemente scelto. Dato l'output, i dati saranno processati nuovamente attraverso una funzione votata a due principali funzioni:
+			Una volta generata la matrice delle adiacenze si può eseguire l'algoritmo di clustering precedentemente scelto. Dato l'output, i dati saranno processati nuovamente attraverso una funzione votata a due principali compiti:
 			\begin{itemize}
-  				\item Rendere l'output conforme con il modello prestabilito
+  				\item Rendere l'output conforme al modello prestabilito
 	  			\item Aggiungere informazioni ad ogni componente del cluster
  			\end{itemize} 
 			

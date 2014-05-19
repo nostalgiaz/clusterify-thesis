@@ -1,6 +1,6 @@
 \subsection{dataTXT}
 % https://www.mashape.com/dandelion/datatxt-1#!documentation
-	DataTXT è un insieme di API semantiche sviluppate da SpazioDati S.r.l.  \url{http://spaziodati.eu} che mira a estrarre significato da testi scritti in diverse lingue. Questo prodotto si diversifica dagli altri dello stesso genere in quanto è stato pensato e ottimizzato per lavorare su testi molto corti, come i tweet.
+	DataTXT è un insieme di API semantiche sviluppate da SpazioDati S.r.l.  -- \url{http://spaziodati.eu} -- che mira a estrarre significato da testi scritti in diverse lingue. Questo prodotto si diversifica dagli altri dello stesso genere in quanto è stato pensato e ottimizzato per lavorare su testi molto corti, come i tweet.
 
 	DataTXT può estrarre da un testo delle \emph{entità}, può categorizzare documenti in categorie stabilite dall'utente stesso e molto altro.
 
@@ -78,10 +78,11 @@ X-DL-units-reset: 2015-10-22 00:00:00 +0000
 		\end{lstlisting}
 
 	\subsubsection{dataTXT REL}
-		DataTXT REL  è un servizio che, ad oggi, non è ancora presente sul mercato, ma che permetterà di capire quando un topic $t_a$ è correlato ad un topic $t_b$, ricavando questo valore dalla seguente formula:
+		DataTXT REL  è un servizio che, ad oggi, non è ancora presente sul mercato ma che permetterà di capire quando un topic $t_a$ è correlato ad un topic $t_b$, ricavando questo valore dalla seguente formula:
 		\begin{equation*}
 			rel(t_a, t_b) = \frac{log(| in(t_a) |) - log(| in(t_a) \cap in(t_b)|)}{log(W) - log(|in(t_b)|)}
 		\end{equation*}
+		dove $in(t)$ è il set di archi entranti nella pagina $t$ e $W$ è il numero totale delle pagine di Wikipedia\cite{datatxt_graph}.
 
 		Come dataTXT-NEX, anche dataTXT-REL sarà interrogabile nello stesso modo: \url{https://api.dandelion.eu/datatxt/rel/v1/?topic1=Roma&topic2=Trento&lang=it&$app_id=YOUR_APP_ID&$app_key=YOUR_APP_KEY}.
 
