@@ -30,8 +30,8 @@ dove $m_i$ è il numero di oggetti nell'$i$-esimo cluster.
 Nel caso di documenti, invece, si deve massimizzare la similarità tra i documenti presenti in un cluster; questo valore viene detto \emph{coesione} del cluster, l'analogo dello scarto quadratico medio, e viene calcolato come segue:
 
 \begin{equation*}
-	Total\ Cohesion = \sum_{i=1}^{K}{\sum_{x \in C_i} {cosine(x, c_i)}}
+	Total\ Cohesion = \sum_{i=1}^{K}{\sum_{x \in C_i} {cos(x, c_i)}}
 \end{equation*}
-dove \emph{cosine} è il $coseno\ di\ similitudine$.
+dove \emph{cos} è il $coseno\ di\ similitudine$.
 
 In ogni caso l'algoritmo termina quando i centroidi assumono uno stato di fermo\cite{k-means}. 

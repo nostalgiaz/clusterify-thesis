@@ -7,7 +7,7 @@
 
 	Questa funzione viene spesso tradotta in\cite{funzione_costo}:
 	\begin{equation*}
-	  	E(C_i) = \sum_{j=1}^{|C_i|}{dist(x_j, center(i))}
+	  	E(C_i) = \sum_{j=1}^{|C_i|}{d(x_j, center(i))}
 	\end{equation*}
 	dove $|C_i|$ è il numero di oggetti presenti nel $i$-esimo cluster, $x_j \in C_i$  e $dist(x_j, center(i))$ è una funzione che calcola la distanza tra il punto $x_j$ ed il centro del cluster $i$-esimo.
 
@@ -15,7 +15,7 @@
 
 	Questo significa che ogni cluster ha almeno un elemento e che un elemento appartiene ad un solo cluster.
 
-	Per segmentare l'insieme in sottogruppi si utilizza il concetto di centri: inizialmente sono posizionati in modo casuale, o secondo un qualsivoglia algoritmo, e iterativamente mossi fino a che questi non raggiungano uno stato di fermo. Quando ciò accade si è in grado di definire a quale centro viene associato il singolo punto e, di conseguenza, la struttura dei cluster calcolati. 
+	Per segmentare l'insieme in sottogruppi si utilizza il concetto di centri: ogni centro è inizialmente posizionato in modo casuale, o secondo un qualsivoglia algoritmo; successivamente, i centri vengon mossi fino a che non raggiungano uno stato di fermo. Quando ciò accade si è in grado di definire a quale centro viene associato il singolo punto e, di conseguenza, la struttura dei cluster calcolati. 
 
 	Gli algoritmi più famosi appartenenti questa categoria sono: 
 	\begin{itemize}
