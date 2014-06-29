@@ -1,6 +1,27 @@
 Una volta definiti i quattro algoritmi è necessario capire quale performa meglio nel clusterizzare argomenti secondo la relatedness offerta da dataTXT.
 
-È stato chiesto a dieci persone di creare dei cluster partendo dalle entità estratte dagli ultimi 50 tweet che popolavano il loro newsfeed e il loro prodotto è stato paragonato con l'output di tutti gli algoritmi proposti. 
+Partendo da un'analisi preliminare, si capisce che l'algoritmo che potrebbe ottenere risultati migliori rispetto agli altri è l'Affinity propagation in quanto è l'unico che non richiede in input il numero di cluster attesi: questo elemento è fondamentale perché è impossibile valutare a priori quanti cluster ogni dataset potrebbe generare. 
+Affinity propagation è stato applicato su concetti molto vari, dall'analisi di una partita di basket all'individuazione di punti interessanti in un'immagine, e per questo si stima che potrebbe rispondere in modo ottimale al problema essendo molto generico.
+
+È stato chiesto a dieci persone di creare dei cluster partendo dalle entità estratte dagli ultimi 50 tweet che popolavano il loro newsfeed.
+
+La scelta del campione non è stata casuale: si sono cercate delle persone che avessero zone di interesse o vaste o molto specifiche, e al contempo si è mirato a coprire molti ambiti, dalla musica alla politica. Questa scelta ha portato a valutare molti aspetti degli algoritmi, dal clusterizzare argomenti molto correlati tra loro al caso opposto. 
+
+Le persone così scelte possono essere rappresentate in questo modo:
+\begin{itemize}
+	\item MartinBrugrara: giovane studente di informatica con la passione dei database, utilizza Twitter per tenersi aggiornato circa le nuove \emph{release} dei progetti che segue;
+	\item AndreaDellera: musicista e cantante di un nuovo gruppo, utilizza questo social network per seguire e per essere seguito dai propri fan;
+	\item gi4n1uc4: ragazzo parigino amante del paese in cui è nato a tal punto da tenersi informato degli eventi che accadono;
+	\item apheniti; ragazza romana amante delle serie TV e del cinema in generale, utilizzaTwitter per rimanere in contatto con i suoi attori preferiti;
+	\item john\_frigo: ragazzo con la passione dei videogiochi, in tutti i sensi. Sogna di diventare un programmatore per qualche company internazionale;
+	\item edorigatti: ragazzo con la passione per le macchine e per le moto, al contempo intraprende studi in materie scientifiche;
+	\item cosaunlama: appassionato di cinema, utilizza Twitter per sapere prima degli altri le nomination agli Oscar;
+	\item michelaelle: giovane fotografa interessata di belle arti, utilizza questo social network per seguire i suoi artisti preferiti e per venire a conoscenza di una mostra a cui vorrebbe andare; 
+	\item SpiritualGuru: ragazzo con la passione dell'informatica legata al design, segue persone che danno lui ispirazione;
+	\item carlotta\_93: ragazza con la passione della politica e dell'attualità, utilizza Twitter per rimanere aggiornata sulle decisioni che prendono i vari partiti.
+\end{itemize}
+
+Il prodotto di queste interviste è stato paragonato con l'output di tutti gli algoritmi proposti. 
 
 Per questo compito è stata utilizzata la funzione ``adjusted\_rand\_score'' offerta da scikit-learn -- \url{http://scikit-learn.org/stable/modules/generated/sklearn.metrics.adjusted_rand_score.html} -- che permette di calcolare la similarità tra i cluster proposti e quello risultante. Per fare questo si considerano tutte le coppie di elementi e si contano quelle che sono state assegnate allo stesso o ad un altro cluster.
 
