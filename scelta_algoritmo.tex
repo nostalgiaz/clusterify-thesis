@@ -14,7 +14,9 @@ Partendo da un'analisi preliminare, si capisce che l'algoritmo che potrebbe otte
 \end{center}
 Questa dice che il $V_1$ è collegato con $V_2$ e $V_3$ formando un angolo che può assumere qualsiasi valore da $0^{\circ}$ a $180^{\circ}$, creando così una distanza tra $V_2$ e $V_3$ tra le $0$ e le $2$ unità.
  
-\emph{Affinity Propagation} e \emph{Spectral}, come già detto, non soffrono di questo problema; inoltre, sono stati applicati su concetti molto vari, dall'analisi di elementi chimici all'individuazione di punti interessanti in un'immagine, e per questo si stima che potrebbero rispondere in modo adatto a questo problema.
+\emph{Affinity Propagation} e \emph{Spectral}, come già detto, non soffrono di questo problema; inoltre, sono stati applicati su concetti molto vari, dall'analisi di elementi chimici all'individuazione di punti interessanti in un'immagine. \emph{Spectral}, rispetto a \emph{Affinity Propagation}, è pensato per grafi sparsi. Il nostro grafo, invece, è per la maggior parte di casi totalmente connesso. 
+
+Per questi motivi si stima che \emph{Affinity Propagation} otterrà risultati migliori degli altri.
 
 \subsubsection{Dimostrazione dell'ipotesi}
 È stato chiesto a dieci persone di creare dei cluster partendo dalle entità estratte dagli ultimi 50 tweet che popolavano il loro newsfeed.
