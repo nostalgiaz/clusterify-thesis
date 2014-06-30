@@ -23,7 +23,7 @@
 
 	Si può vedere il tutto come una struttura a mattoncini dove si possono scambiare dei blocchi per raggiungere il risultato atteso, senza necessariamente modificare il codice del \emph{core}. Questi blocchi sono i \emph{reader}, i \emph{livelli di cache} e gli \emph{algoritmi di cluster}.
 	
-	Permettere di ottenere testi da più fonti significa creare altrettanti mezzi per interfacciare Clusterify a queste sorgenti, creando una \emph{black-box} che trasforma i testi in un dato strutturato precedentemente definito. Clusterify nasce con \emph{TwitterReader} che, come da nome, permette di leggere i dati direttamente dalle API di Twitter. Per creare un nuovo reader, quindi, basta soddisfare trasformare l'input secondo la struttura imposta.
+	Permettere di ottenere testi da più fonti significa creare altrettanti mezzi per interfacciare Clusterify a queste sorgenti, creando una \emph{black-box} che trasforma i testi in un dato strutturato precedentemente definito. Clusterify nasce con \emph{TwitterReader} che, come da nome, permette di leggere i dati direttamente dalle API di Twitter. Per creare un nuovo reader, quindi, basta trasformare l'input secondo la struttura imposta.
 
 	La cache, invece, è una componente strutturale che viene utilizzata da tutto il progetto per evitare il replicarsi di richieste HTTP già fatte. Clusterify nasce con Redis -- \url{http://redis.io/} -- integrato, permettendo comunque di cambiare questa componente se lo sviluppatore lo desidera.
 
@@ -32,9 +32,9 @@
 	\subsection{Algoritmi di clustering}
 		Un algoritmo di clustering permette di raggruppare oggetti all'interno di insiemi, mantenendo uniti gli elementi che secondo alcune regole risultano più coesi e dividendo quelli che lo sono meno.
 
-		Poiché non esiste un algoritmo ottimo per ogni caso pensabile, Clusterify ne comprende \emph{quattro} nel core. Questi sono utili sia a rilasciare un sistema in grado di coprire la maggior parte dei casi d'uso, sia per valutare qual'è la performance migliore con l'input in questione.
+		Poiché non esiste un algoritmo adatto per ogni caso pensabile, Clusterify ne comprende \emph{quattro} nel core. Questi sono utili sia a rilasciare un sistema in grado di coprire la maggior parte dei casi d'uso, sia per valutare qual'è la performance migliore con l'input in questione.
 
-		I quattro algoritmi presenti in Clusterify sono presi da scikit-learn -- \url{http://scikit-learn.org/}. Questa decisione è stata presa sia per offrire più di un algoritmo alla community, sia per valutare se la mia ipotesi iniziale circa il miglior algoritmo fosse corretta. 
+		I quattro algoritmi presenti in Clusterify sono offerti dalla libreria scikit-learn -- \url{http://scikit-learn.org/}. Questa decisione è stata presa sia per offrire più di un algoritmo alla community, sia per valutare se la mia ipotesi iniziale circa l'algoritmo più adatto fosse corretta. 
 
 		Questi algoritmi sono \emph{K-means}, \emph{Spectral}, \emph{Affinity Propagation} e \emph{Ward}.
 
@@ -68,7 +68,7 @@
 	\end{enumerate} 
 	
 	\subsection{Acquisizione dei testi}
-		La componente di acquisizione testi, come detto precedentemente, è una delle parti pluggabili di Clusterify.
+		La componente di acquisizione testi, come detto precedentemente, è una delle parti ``pluggabili'' di Clusterify.
 
 		Questa fase si occupa del prendere i dati da una qualsivoglia fonte e di salvarli in modo conforme allo standard imposto. All'interno di questa componente è possibile implementare, se necessario, un livello di cache in modo da impedire di richiedere più volte le stesse informazioni.
 
@@ -77,7 +77,7 @@
 	\subsection{Annotazioni dei testi}
 		La seconda fase del workflow si occupa di annotare i testi per mezzo di dataTXT.
 		
-		Quest'operazione è fondamentale per un buon risultato finale in quanto si può  incorrere nel riconoscimento di entità sbagliate; oppure, nel caso contrario, ci si può imbattere nell'estrazione di poche entità ma molto precise. Avere troppe annotazioni sbagliate può condurre all'avere dei dati non veritieri; il contrario potrebbe portare a non avere nemmeno un'entità estratta per testo analizzato e quindi, in fase di clustering, i testi analizzati da cui non si estraggono entità, verrebbero persi.
+		Quest'operazione è fondamentale per un buon risultato finale in quanto si può  incorrere nel riconoscimento di entità sbagliate; oppure, nel caso contrario, ci si può imbattere nell'estrazione di poche entità ma molto precise. Avere troppe annotazioni sbagliate può condurre all'avere dei dati non affidabili; il contrario potrebbe portare a non avere nemmeno un'entità estratta per testo analizzato e quindi, in fase di clustering, i testi analizzati da cui non si estraggono entità, verrebbero persi.
 
 		Al programmatore è quindi chiesto di scegliere molto attentamente i parametri che verranno passati all'estrattore, per non finire in nessuno dei due casi.
 

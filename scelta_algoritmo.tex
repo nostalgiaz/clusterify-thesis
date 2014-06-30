@@ -1,31 +1,63 @@
 Una volta definiti i quattro algoritmi è necessario capire quale performa meglio nel clusterizzare argomenti secondo la relatedness offerta da dataTXT.
 
-Partendo da un'analisi preliminare, si capisce che l'algoritmo che potrebbe ottenere risultati migliori rispetto agli altri è l'Affinity propagation in quanto è l'unico che non richiede in input il numero di cluster attesi: questo elemento è fondamentale perché è impossibile valutare a priori quanti cluster ogni dataset potrebbe generare. 
-Affinity propagation è stato applicato su concetti molto vari, dall'analisi di una partita di basket all'individuazione di punti interessanti in un'immagine, e per questo si stima che potrebbe rispondere in modo ottimale al problema essendo molto generico.
+\subsubsection{Ipotesi iniziale}
+Partendo da un'analisi preliminare, si capisce che l'algoritmo che potrebbe ottenere risultati migliori rispetto agli altri è l'\emph{Affinity Propagation} in quanto è l'unico che non richiede in input il numero di cluster attesi: questo elemento è fondamentale perché è impossibile valutare a priori quanti cluster ogni dataset potrebbe generare. In ogni caso, per rendere i dati più attendibili si è deciso di provare i vari algoritmi con $K$ impostato al numero di cluster richiesti dall'utente, eliminando così il vantaggio di cui godeva l'\emph{Affinity Propagation}.
 
+\emph{K-means} e \emph{Ward} sono stati disegnati per prendere in input una matrice di distanze euclidee mentre \emph{Affinity Propagation} e \emph{Spectral} richiedono la matrice delle adiacenze. Non esistendo un unico \emph{layout} con il quale possa essere rappresentato il grafo analizzato, si impedisce ai primi due algoritmi di poter essere scelti come implementazione di default proposta da Clusterify, in quanto si dispone del grafo delle distanze, ma non della matrice. Si può vedere come la matrice di distanze euclidee è diversa dalla matrice delle adiacenze attraverso questo esempio: Sia M la seguente matrice:
+
+\begin{center}
+     $M = \begin{bmatrix}
+                0 & 1 & 1\\
+                1 & 0 & 0\\
+                1 & 0 & 0
+        \end{bmatrix}$
+\end{center}
+Questa dice che il $V_1$ è collegato con $V_2$ e $V_3$ formando un angolo che può assumere qualsiasi valore da $0^{\circ}$ a $180^{\circ}$, creando così una distanza tra $V_2$ e $V_3$ tra le $0$ e le $2$ unità.
+ 
+\emph{Affinity Propagation} e \emph{Spectral}, come già detto, non soffrono di questo problema; inoltre, sono stati applicati su concetti molto vari, dall'analisi di elementi chimici all'individuazione di punti interessanti in un'immagine, e per questo si stima che potrebbero rispondere in modo adatto a questo problema.
+
+\subsubsection{Dimostrazione dell'ipotesi}
 È stato chiesto a dieci persone di creare dei cluster partendo dalle entità estratte dagli ultimi 50 tweet che popolavano il loro newsfeed.
 
 La scelta del campione non è stata casuale: si sono cercate delle persone che avessero zone di interesse o vaste o molto specifiche, e al contempo si è mirato a coprire molti ambiti, dalla musica alla politica. Questa scelta ha portato a valutare molti aspetti degli algoritmi, dal clusterizzare argomenti molto correlati tra loro al caso opposto. 
 
-Le persone così scelte possono essere rappresentate in questo modo:
+Le persone scelte, con relativa descrizione, sono le seguenti:
 \begin{itemize}
 	\item MartinBrugrara: giovane studente di informatica con la passione dei database, utilizza Twitter per tenersi aggiornato circa le nuove \emph{release} dei progetti che segue;
 	\item AndreaDellera: musicista e cantante di un nuovo gruppo, utilizza questo social network per seguire e per essere seguito dai propri fan;
 	\item gi4n1uc4: ragazzo parigino amante del paese in cui è nato a tal punto da tenersi informato degli eventi che accadono;
-	\item apheniti; ragazza romana amante delle serie TV e del cinema in generale, utilizzaTwitter per rimanere in contatto con i suoi attori preferiti;
-	\item john\_frigo: ragazzo con la passione dei videogiochi, in tutti i sensi. Sogna di diventare un programmatore per qualche company internazionale;
+	\item apheniti: ragazza romana amante delle serie TV e del cinema in generale, utilizza Twitter per rimanere in contatto con i suoi attori preferiti;
+	\item john\_frigo: ragazzo con la passione dei videogiochi, sia dal lato utente che dal lato programmatore. Sogna di diventare divenire parta di qualche company internazionale;
 	\item edorigatti: ragazzo con la passione per le macchine e per le moto, al contempo intraprende studi in materie scientifiche;
 	\item cosaunlama: appassionato di cinema, utilizza Twitter per sapere prima degli altri le nomination agli Oscar;
-	\item michelaelle: giovane fotografa interessata di belle arti, utilizza questo social network per seguire i suoi artisti preferiti e per venire a conoscenza di una mostra a cui vorrebbe andare; 
+	\item michelaelle: giovane fotografa interessata di belle arti, utilizza questo social network per seguire i suoi artisti preferiti e per venire a conoscenza di qualche mostra a cui vorrebbe andare; 
 	\item SpiritualGuru: ragazzo con la passione dell'informatica legata al design, segue persone che danno lui ispirazione;
 	\item carlotta\_93: ragazza con la passione della politica e dell'attualità, utilizza Twitter per rimanere aggiornata sulle decisioni che prendono i vari partiti.
 \end{itemize}
 
 Il prodotto di queste interviste è stato paragonato con l'output di tutti gli algoritmi proposti. 
 
-Per questo compito è stata utilizzata la funzione ``adjusted\_rand\_score'' offerta da scikit-learn -- \url{http://scikit-learn.org/stable/modules/generated/sklearn.metrics.adjusted_rand_score.html} -- che permette di calcolare la similarità tra i cluster proposti e quello risultante. Per fare questo si considerano tutte le coppie di elementi e si contano quelle che sono state assegnate allo stesso o ad un altro cluster.
+Per questo compito è stata utilizzata la funzione ``adjusted\_rand\_score'' offerta da scikit-learn -- \url{http://bit.ly/1og5d2C} -- che permette di calcolare la similarità tra i cluster proposti e quello risultante. Per fare questo si considerano tutte le coppie di elementi e si contano quelle che sono state assegnate allo stesso cluster piuttosto che ad un altro.
 
-Per permettere agli intervistati di formare questi cluster è stato creato un apposito file su google drive -- \url{https://docs.google.com/spreadsheets/d/1RNte6_I-cO5A23dKoaAyIRX5iWOGAEN3S25VIpXQLWU/edit?usp=sharing} -- con gli argomenti da clusterizzare pre-caricati ed è stato chiesto loro di segnare con lo stesso numero quelli che secondo loro avrebbero dovuto appartenere allo stesso cluster. 
+Per calcolare  l'\emph{Adjusted Rand index}, in primis, si crea la tabella di contingenza partendo dai due cluster $X$ e $Y$ che si vogliono paragonare e successivamente si applica la seguente formula.
+
+\begin{equation*}
+	\bordermatrix{
+                 ~ & Y_1 & Y_2 & \ldots & Y_s \cr
+                 X_1 & n_{11} & n_{12} & \ldots & n_{1s} \cr
+                 X_2 & n_{21} & n_{22} & \ldots & n_{2s} \cr
+                 \vdots & \vdots & \vdots & \ddots & \vdots \cr
+                X_r & n_{r1} & n_{r2} & \ldots & n_{rs}	
+        }
+\end{equation*}
+con $n_{ij}=|X_i \cap Y_j|$. Sia $a_r = \sum_{i}^{s}{n_{ri}}$ e  $b_s = \sum_{i}^{r}{n_{is}}$
+\begin{equation*}
+	ARI = \frac{ \sum_{ij} \binom{n_{ij}}{2} - [\sum_i \binom{a_i}{2} \sum_j \binom{b_j}{2}] / \binom{n}{2} }{ \frac{1}{2} [\sum_i \binom{a_i}{2} + \sum_j \binom{b_j}{2}] - [\sum_i \binom{a_i}{2} \sum_j \binom{b_j}{2}] / \binom{n}{2} }
+\end{equation*}
+
+$ARI$ è un valore compreso tra $-1$ e $1$; con valore uguale a $0$ significa che gli elementi sono stati posizionati all'interno del cluster in modo casuale, mentre $1$ prova che i due cluster sono identici.
+
+Per permettere agli intervistati di formare questi cluster è stato creato un apposito file su google drive -- \url{http://bit.ly/1q5UEAD} -- con gli argomenti da clusterizzare pre-caricati ed è stato chiesto loro di segnare con lo stesso numero quelli che secondo loro avrebbero dovuto appartenere allo stesso cluster. 
 
 Lanciando \texttt{python manage.py analyze} dalla \emph{root} di Clusterify questi dati vengono analizzati. I risultati sono riportati nel grafico:
 
@@ -35,14 +67,14 @@ Lanciando \texttt{python manage.py analyze} dalla \emph{root} di Clusterify ques
    	 	ybar,
 		width=12cm,
 	        	height=8cm,
-        		ymin=0,
-	  	ymax=150,  
+        		ymin=-0.2,
+	  	ymax=1.5,  
 		bar width=3pt,
         		legend columns=2,
     		legend style={draw=none,nodes={inner sep=3pt}},,
-    		ylabel={\% successo},
-    		symbolic x coords={
-    			MartinBrugrara,
+    		ylabel={Adjusted Rand index},
+		symbolic x coords={
+    			MartinBrugnara,
     			AndreaDellera,
     			gi4n1uc4,
     			apheniti,
@@ -67,60 +99,62 @@ Lanciando \texttt{python manage.py analyze} dalla \emph{root} di Clusterify ques
 		x tick label style={rotate=45, anchor=east},
     	]
 		\addplot coordinates {
-			(MartinBrugrara, 89.61) 
-			(AndreaDellera, 71.72) 
-			(gi4n1uc4, 85.81)
-			(apheniti, 77.02)
-			(john_frigo, 94.47)
-			(edorigatti, 81.56)
-			(cosaunlama, 79.00)
-			(michelaelle, 76.43)
-			(SpiritualGuru, 81.04)
-			(carlotta_93, 74.23)
+			(MartinBrugnara, 0.792204775319)
+                            (AndreaDellera, 0.434432163714) 
+                            (gi4n1uc4, 0.716290120247)   
+                            (apheniti, 0.540495967672)   
+                            (john_frigo, 0.889382638098)  
+                            (edorigatti, 0.631148094007)  
+                            (cosaunlama, 0.58004876853)   
+                            (michelaelle, 0.528526612988)  
+                            (SpiritualGuru, 0.620828503357) 
+                            (carlotta_93, 0.484514870739)  
 		};
 		\addplot coordinates {
-			(MartinBrugrara, 57.08) 
-			(AndreaDellera, 55.56) 
-			(gi4n1uc4, 56.89)
-			(apheniti, 64.60)
-			(john_frigo, 59.87)
-			(edorigatti, 57.96)
-			(cosaunlama, 58.86)
-			(michelaelle,  57.15)
-			(SpiritualGuru, 56.46)
-			(carlotta_93, 65.06)
+			(MartinBrugnara, 0.318317803835)
+			(AndreaDellera, 0.371832156211) 
+			(gi4n1uc4, 0.300008090989)   
+			(apheniti, 0.42946150798)    
+			(john_frigo, 0.278548492689)  
+			(edorigatti, 0.236083556218)  
+			(cosaunlama, 0.349570987301)  
+			(michelaelle, 0.332949706525)  
+			(SpiritualGuru, 0.238516819184) 
+			(carlotta_93, 0.481577574281)  
 		};
 		\addplot coordinates {
-			(MartinBrugrara, 64.26) 
-			(AndreaDellera, 67.84) 
-			(gi4n1uc4, 65.23)
-			(apheniti, 64.77)
-			(john_frigo, 61.94)
-			(edorigatti, 61.73)
-			(cosaunlama, 67.00)
-			(michelaelle,  64.50)
-			(SpiritualGuru, 62.50)
-			(carlotta_93, 71.69)
+			(MartinBrugnara, 0.336377993361)
+			(AndreaDellera, 0.272699286168) 
+			(gi4n1uc4, 0.286320770004)   
+			(apheniti, 0.288863729674)   
+			(john_frigo, 0.271891556903)  
+			(edorigatti, 0.256289769946)  
+			(cosaunlama, 0.337973114692)  
+			(michelaelle, 0.286548908826)  
+			(SpiritualGuru, 0.255612885439) 
+			(carlotta_93, 0.457566471898)  
 		};
 		\addplot coordinates {
-			(MartinBrugrara, 66.82) 
-			(AndreaDellera, 63.63) 
-			(gi4n1uc4, 64.32)
-			(apheniti, 64.44)
-			(john_frigo, 63.59)
-			(edorigatti, 62.81)
-			(cosaunlama, 67.00)
-			(michelaelle,  64.33)
-			(SpiritualGuru, 62.78)
-			(carlotta_93, 72.88)
+			(MartinBrugnara, 0.285204256682)
+			(AndreaDellera, 0.356783019502) 
+			(gi4n1uc4, 0.304698904367)   
+			(apheniti, 0.295411246672)   
+			(john_frigo, 0.238719818036)  
+			(edorigatti, 0.234674100624)  
+			(cosaunlama, 0.340088597997)  
+			(michelaelle, 0.290020086459)  
+			(SpiritualGuru, 0.250021954049) 
+			(carlotta_93, 0.433868128924)  
 		};
 		\legend{Affinity Propagation, Specral, K-means, Hierarchical}
 	\end{axis}
 \end{tikzpicture}
 \catcode`\_=8
 
-Come si può dedurre dal grafico, ogni persona che ha creato il proprio cluster ideale si è avvicinata inconsciamente alla soluzione proposta dall'\emph{Affinity Propagation}. 
+Come si può dedurre dal grafico, ogni persona che ha creato il proprio cluster ideale si è avvicinata inconsciamente alla soluzione proposta dall'\emph{Affinity Propagation}.
+
+\emph{Spectral} si comporta come valutato, trovando dei problemi con un grafo molto denso. \emph{K-means} e \emph{Ward} ottengono, invece, valori tendenti allo $0$: utilizzando un input non corretto, non avrebbe senso un valore tendente a $1$.
+
+Alla luce di questi risultati, Clusterify utilizzerà  \emph{Affinity Propagation}.
 
 Una volta raccolti i dati è stato mostrato al campione intervistato il risultato proposto su di un nuovo dataset, generato sempre dall'account Twitter dei diretti interessati, ed il risultato nel 90\% dei casi, era sensato ed utilizzabile.
-
-Alla luce di questi risultati, Clusterify utilizzerà Affinity Propagation.
