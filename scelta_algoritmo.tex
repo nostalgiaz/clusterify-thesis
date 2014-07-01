@@ -3,7 +3,7 @@ Una volta definiti i quattro algoritmi è necessario capire quale performa megli
 \subsubsection{Ipotesi iniziale}
 Partendo da un'analisi preliminare, si capisce che l'algoritmo che potrebbe ottenere risultati migliori rispetto agli altri è l'\emph{Affinity Propagation} in quanto è l'unico che non richiede in input il numero di cluster attesi: questo elemento è fondamentale perché è impossibile valutare a priori quanti cluster ogni dataset potrebbe generare. In ogni caso, per rendere i dati più attendibili si è deciso di provare i vari algoritmi con $K$ impostato al numero di cluster richiesti dall'utente, eliminando così il vantaggio di cui godeva l'\emph{Affinity Propagation}.
 
-\emph{K-means} e \emph{Ward} sono stati disegnati per prendere in input una matrice di distanze euclidee mentre \emph{Affinity Propagation} e \emph{Spectral} richiedono la matrice delle adiacenze. Non esistendo un unico \emph{layout} con il quale possa essere rappresentato il grafo analizzato, si impedisce ai primi due algoritmi di poter essere scelti come implementazione di default proposta da Clusterify, in quanto si dispone del grafo delle distanze, ma non della matrice. Si può vedere come la matrice di distanze euclidee è diversa dalla matrice delle adiacenze attraverso questo esempio: Sia M la seguente matrice:
+\emph{K-means} e \emph{Ward} sono stati disegnati per prendere in input una matrice di distanze euclidee mentre \emph{Affinity Propagation} e \emph{Spectral} richiedono la matrice delle adiacenze. Non esistendo un unico \emph{layout} con il quale possa essere rappresentato il grafo analizzato, si impedisce ai primi due algoritmi di poter essere scelti come implementazione di default proposta da Clusterify, in quanto si dispone del grafo, quindi della matrice delle adiacenze, ma non di quella delle distanze euclidee. Si può vedere come la matrice di distanze euclidee è diversa dalla matrice delle adiacenze attraverso questo esempio: Sia M la seguente matrice:
 
 \begin{center}
      $M = \begin{bmatrix}
@@ -12,7 +12,7 @@ Partendo da un'analisi preliminare, si capisce che l'algoritmo che potrebbe otte
                 1 & 0 & 0
         \end{bmatrix}$
 \end{center}
-Questa dice che il $V_1$ è collegato con $V_2$ e $V_3$ formando un angolo che può assumere qualsiasi valore da $0^{\circ}$ a $180^{\circ}$, creando così una distanza tra $V_2$ e $V_3$ tra le $0$ e le $2$ unità.
+Questa dice che $V_1$ è collegato con $V_2$ e $V_3$ formando un angolo che può assumere qualsiasi valore da $0^{\circ}$ a $180^{\circ}$, creando così una distanza tra $V_2$ e $V_3$ tra le $0$ e le $2$ unità.
  
 \emph{Affinity Propagation} e \emph{Spectral}, come già detto, non soffrono di questo problema; inoltre, sono stati applicati su concetti molto vari, dall'analisi di elementi chimici all'individuazione di punti interessanti in un'immagine. \emph{Spectral}, rispetto a \emph{Affinity Propagation}, è pensato per grafi sparsi. Il nostro grafo, invece, è per la maggior parte di casi totalmente connesso. 
 
@@ -155,7 +155,7 @@ Lanciando \texttt{python manage.py analyze} dalla \emph{root} di Clusterify ques
 
 Come si può dedurre dal grafico, ogni persona che ha creato il proprio cluster ideale si è avvicinata inconsciamente alla soluzione proposta dall'\emph{Affinity Propagation}.
 
-\emph{Spectral} si comporta come valutato, trovando dei problemi con un grafo molto denso. \emph{K-means} e \emph{Ward} ottengono, invece, valori tendenti allo $0$: utilizzando un input non corretto, non avrebbe senso un valore tendente a $1$.
+\emph{Spectral} si comporta come valutato, riscontrando dei problemi con un grafo molto denso. \emph{K-means} e \emph{Ward} ottengono, invece, valori tendenti allo $0$: utilizzando un input non corretto, non avrebbe senso un valore tendente a $1$.
 
 Alla luce di questi risultati, Clusterify utilizzerà  \emph{Affinity Propagation}.
 
