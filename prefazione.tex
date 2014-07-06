@@ -1,15 +1,24 @@
 \chapter{Introduzione}
 
-\epigraph{``È evidente che l’uomo sia un essere sociale più di ogni ape e più di ogni animale da gregge. Infatti, la natura non fa nulla, come diciamo, senza uno scopo: l’uomo è l’unico degli esseri viventi a possedere la parola."}{--- \textup{Aristotele}, Politica }
+\epigraph{``È evidente che l’uomo sia un essere sociale più di ogni ape e più di ogni animale da gregge. Infatti, la natura non fa nulla, come diciamo, senza uno scopo: l’uomo è l’unico degli esseri viventi a possedere la parola.''}{--- \textup{Aristotele}, Politica }
 
 L'uomo, in quanto essere sociale, è portato al bisogno di comunicare. Dall'invenzione del telegrafo all'utilizzo di Internet è cambiato solamente il mezzo di divulgazione del pensiero ma non l'atto di volerlo condividere con il resto dell'umanità.
 
-I pensieri vengono talvolta espressi sotto forma di testi che un individuo scrive nella speranza che vengano letti da altri. La grande mole di messaggi può essere elaborata per ricavarne informazioni utili, che potenzialmente potrebbero risolvere alcuni problemi.
+I pensieri vengono talvolta espressi sotto forma di testi che un individuo scrive nella speranza che vengano letti da altri. La grande mole di messaggi può essere elaborata per ricavarne informazioni utili che potenzialmente potrebbero risolvere diversi problemi.
 
-Clusterify ha l'intento di mostrare la potenzialità del clustering non supervisionato, processo in grado di aprire le porte a molteplici risultati: dalla possibilità di filtrare testi per una macro-area interessata, al profilare persone interessate ad un'attività per cercare di anticipare il mercato proponendo loro quello che vogliono prima di sapere ciò di cui hanno bisogno.
+Questa tesi mira a mostrare la potenzialità del clustering, processo in grado di aprire le porte a molteplici risultati: dalla possibilità di filtrare testi per una macro-area interessata, al profilare persone interessate ad un’attività per cercare di anticipare il mercato proponendo loro quello che vogliono prima di sapere ciò di cui hanno bisogno.
+I settori nei quali si può utilizzare il clustering sono davvero illimitati in quanto nessuna restrizione viene imposta, bensì viene permesso ai dati stessi di adattare l’ambiente, rendendo così questa tecnica economica e vincente.
 
- I settori nei quali si può utilizzare il clustering sono davvero illimitati in quanto nessuna restrizione viene imposta, bensì viene permesso ai dati stessi di adattare l'ambiente, rendendo così questa tecnica economica e vincente.
+Clusterify, prodotto nato dall'internato svolto sotto la supervisione del prof. Alberto Montresor, ha l'intento di mostrare le potenzialità dell'applicazione del giusto algoritmo di clustering su di una collezione di testi. 
 
-Clusterify mira a organizzare tweet servendosi delle entità che questi toccano, precedentemente estratte con l'aiuto di dataTXT e successivamente clusterizzate. Una volta creato questo raggruppamento, sarà possibile utilizzarlo per navigare attraverso i tweet che compongono una collezione. 
+L'idea di fondo è quella di prendere dei testi, analizzarli e raggrupparli per il loro significato semantico. Si è scelto di utilizzare Twitter come fonte dalla quale attingere le informazioni da processare poiché si è ritenuto il luogo dove vivono messaggi di diversa natura, dove ogni elemento è contenitore di un singolo aspetto che permette di caratterizzarlo all'interno dell'intera collezione, trovando così elementi simili oppure opposti. 
 
-SpazioDati -- \url{http://spaziodati.eu} --, dopo aver capito la potenzialità di questo prodotto, ha deciso di adottarlo come use case ufficiale ed, inoltre, di utilizzarlo come potenziale base per nuovi progetti.
+Organizzare queste informazioni significa poterle rappresentare per mezzo di una struttura dati che ne permetta l'elaborazione: il grafo pesato. Questo non contiene direttamente i \emph{tweet}, bensì un insieme di entità ricavate per mezzo di un processo di \emph{entity extraction} applicato sui testi stessi.
+
+Vista la grande quantità di algoritmi di clustering presenti nello stato dell'arte, era necessario capire quale fosse il più adatto per questo genere di problema. Sono stati presi in considerazione \emph{K-means}, \emph{Spectral}, \emph{Affinity Propagation} e \emph{Ward} per poter valutare una soluzione basandosi su più tipologie di algoritmi. 
+
+Dopo aver creato un campione di 10 persone, è stato chiesto loro di creare un cluster partendo dalle entità estratte dagli ultimi \emph{tweet} presenti nei loro \emph{newsfeed}. Queste risposte sono poi state confrontate con gli \emph{output} dei quattro algoritmi fino a decretare all'unanimità \emph{Affinity Propagation} come il più adatto.
+
+È stato creato, infine, un \emph{workflow} diviso in tre parti che permette ad un utente di utilizzare Clusterify sui propri \emph{tweet}. Questo acquisisce gli ultimi 200 testi, applica su questi un processo di \emph{entity extraction}, crea il cluster e successivamente lo mostra a video, permettendo la navigazione dei testi attraverso diverse aree tematiche utilizzando l'interfaccia appositamente realizzata.
+
+SpazioDati -- \url{http://spaziodati.eu} --, dopo esser venuto a conoscenza dell'utilizzo di DataTXT in Clusterify ed aver capito la potenzialità di questo prodotto, ha deciso di adottarlo come use-case ufficiale. Da questo è nata una collaborazione con SpazioDati che ha chiesto di estendere Clusterify per poter elaborare 2000 tweet della campagna elettorale di Alexis Tsipras partendo non più dal \emph{newsfeed}, bensì da una lista di \emph{id}.

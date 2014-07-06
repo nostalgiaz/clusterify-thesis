@@ -8,12 +8,12 @@
 	\end{enumerate}
 	Probabilmente $X$ sarà molto interessato alla ricetta del \emph{Plumcake} ma, al contempo, non attratto dalla vita personale di $Y$.
 
-	Clusterify dividerà questi tweet in gruppi distinti ed $X$ avrà la possibilità di leggere solo quelli riferiti ad ambiti culinari senza essere disturbato da storie di vita personale, recensioni di film e quant'altro.
+	Clusterify dividerà questi tweet in gruppi distinti ed $X$ avrà la possibilità di leggere solo quelli riferiti ad ambiti culinari senza essere disturbato da storie di vita personale, recensioni di film o altro.
 
 \section{Background}
 	Clusterify nasce con lo scopo di raggruppare per argomenti i tweet presenti nel newsfeed di un qualsiasi utente. Per questo scopo è necessario attribuire ad ogni tweet gli argomenti di cui tratta raggruppandoli per quanto questi siano collegati tra di loro. 
 
-	Si è deciso di utilizzare la \emph{Twitter API} per ottenere dati da twitter e \emph{dataTXT} per estrarre gli argomenti e calcolarne le varie relazioni.
+	Si è deciso di utilizzare la \emph{Twitter API} per ottenere dati da Twitter e \emph{dataTXT} per estrarre gli argomenti e calcolarne le varie relazioni.
 
 	\input{twitter}
 	\input{datatxt}
@@ -72,7 +72,7 @@
 
 		Questa fase si occupa del prendere i dati da una qualsivoglia fonte e di salvarli in modo conforme allo standard imposto. All'interno di questa componente è possibile implementare, se necessario, un livello di cache in modo da impedire di richiedere più volte le stesse informazioni.
 
-		In Clusterify, \emph{TwitterReader} utilizza \emph{Twython}  -- \url{https://github.com/ryanmcgrath/twython} --, una libreria Python che offre un accesso facile ai dati presenti su Twitter. In altre parole, Twython offre un \emph{wrapper} alle API di Twitter, permettendo al programmatore di ottenere dati senza preoccuparsi della gestione errori, dell'aggiornamento delle API e quant'altro. 
+		In Clusterify, \emph{TwitterReader} utilizza \emph{Twython}  -- \url{https://github.com/ryanmcgrath/twython} --, una libreria Python che offre un accesso facile ai dati presenti su Twitter. In altre parole, Twython offre un \emph{wrapper} alle API di Twitter, permettendo al programmatore di ottenere dati senza preoccuparsi della gestione errori, dell'aggiornamento delle API o altro. 
 
 	\subsection{Annotazioni dei testi}
 		La seconda fase del workflow si occupa di annotare i testi per mezzo di dataTXT.

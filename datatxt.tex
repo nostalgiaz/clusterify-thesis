@@ -16,7 +16,7 @@
 %	dove $in(t)$ è il set di archi entranti nella pagina $t$ e $W$ è il numero totale delle pagine di Wikipedia\cite{datatxt_graph}.
 
 	\subsubsection{dataTXT NEX}
-		DataTXT NEX (\emph{Named Entity eXtraction}) è un API che permette di localizzazione e di estratte da un testo entità quali persone, organizzazioni, luoghi, espressioni di tempo, ecc.
+		DataTXT NEX (\emph{Named Entity eXtraction}) è un API che permette di localizzare e di estrarre da un testo entità quali persone, organizzazioni, luoghi, espressioni di tempo, ecc.
 
 		Per ottenere queste informazioni basta richiedere via HTTP l'elaborazione dei dati  prefissati in input. Segue un esempio: \url{https://api.dandelion.eu/datatxt/nex/v1/?lang=en&text=The%20doctor%20says%20an%20apple%20is%20better%20than%20an%20orange&include=type,abstract,categories,lod&$app_id=YOUR_APP_ID&$app_key=YOUR_APP_KEY}
 
@@ -24,7 +24,7 @@
 
 		Come  tutte le chiamate HTTP, anche le risposte di dataTXT sono composte da un \emph{header} e da un \emph{body}.
 
-		Nella prima sezione sono presenti molte informazioni utili quali il numero di crediti utilizzati, quelli rimanente e la data in cui questi torneranno al valore iniziale.
+		Nella prima sezione sono presenti molte informazioni utili quali il numero di crediti utilizzati, quelli rimanenti e la data in cui questi torneranno al valore iniziale, come di seguito mostrato:
 		
 		\begin{lstlisting}
 Connection: keep-alive

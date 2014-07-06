@@ -1,5 +1,5 @@
 \section{Clustering spectral}
-	Questa tipologia di clustering nasce dal bisogno di eliminare delle mancanze presenti negli altri metodi: i metodi partizionali riescono a creare cluster solamente di forma sferica, basandosi, come abbiamo già visto, sul concetto di centro; al contrario i metodi density-based hanno un approccio troppo sensibile ai parametri dati.
+	Questa tipologia di clustering nasce dal bisogno di colmare delle mancanze presenti negli altri metodi: i metodi partizionali riescono a creare cluster solamente di forma sferica, basandosi, come abbiamo già visto, sul concetto di centro; mentre i metodi density-based hanno un approccio troppo sensibile ai parametri dati.
 
 	Per risolvere questi problemi si utilizza un grafo di similarità che ha come vertici le componenti da clusterizzare e, come valore degli archi, la similarità delle componenti tra cui questi sono sottesi.
 
@@ -8,7 +8,7 @@
 	\begin{equation*}
 		NormCut(C_1, C_2) =  \frac{Cut(C_1, C_2)}{Vol(C_1)} + \frac{Cut(C_1, C_2)}{Vol(C_2)}
 	\end{equation*}
-	dove $C_1$, $C_2$ sono due gruppi di nodi,  $w_{ij}$ il peso dell'arco sotteso tra $i$ e $j$, $Cut$ e $Vol$ definiti come segue:
+	dove $C_1$, $C_2$ sono due gruppi di nodi e $Cut$ e $Vol$ definiti come segue:
 
 	\begin{equation*}
 		Cut(C_1, C_2) = \sum_{i \in C_1, j \in C_2} {w_{ij}}
@@ -17,6 +17,6 @@
 	\begin{equation*}
 		Vol(C) = \sum_{i \in C, j \in V} {w_{ij}}
 	\end{equation*}
-	dove $Cut(C_1, C_2)$ calcola il peso totale delle connessioni tra $C_1$ e $C_2$ e $Vol(C)$ calcola il peso totale degli archi originati dal cluster $C$.
+	dove $Cut(C_1, C_2)$ calcola il peso totale delle connessioni tra $C_1$ e $C_2$, $Vol(C)$ calcola il peso totale degli archi originati dal cluster $C$ e $w_{ij}$ indica il peso dell'arco sotteso tra $i$ e $j$.
 
-	Uno degli algoritmi più famosi appartenente a questa categoria prende il nome di Spectral\cite{spectral}.
+	Uno degli algoritmi più importanti appartenente a questa categoria prende il nome di Spectral\cite{spectral}.
